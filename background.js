@@ -5,15 +5,20 @@ chrome.browserAction.onClicked.addListener(executor);
 
 function executor (tab) {
 	
+	console.log(tab); // information about the tab in which the icon is clicked
+	console.log("the url: ", tab.url); 
+
+
+
 	// sends message to content.js
 	let msg = {
-		txt: "hello"
+		txt: "hello",
+		url: "ebay uk"
 	}
+	// send message to the content.js of the tab with the corresponding id
 	chrome.tabs.sendMessage(tab.id, msg)
 }
-// const executor = () => {
-// 	console.log("the dog is barking")
-// }
+
 
 chrome.runtime.onInstalled.addListener( function() {
 	chrome.storage.sync.set({color: '#3aa757'}, function() {

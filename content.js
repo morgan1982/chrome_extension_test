@@ -9,20 +9,22 @@ for (elem of paragraphs) {
 
 chrome.runtime.onMessage.addListener(messageReceiver);
 
-function messageReceiver(req, sender, res) {
+function messageReceiver(request, sender, sendResponse) {
+
 
 	function getElementByXpath(path) {
+
 	  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		}
 
+		// product url 
 		let url = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
 		url.value += "hello there"
-		// console.log( getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]").value );
 
-		// let origin = comboboxelement 
+		// Origin MarketPlace
+		document.getElementById("MainContent_DropDownOriginMarketPlace").value = `${ request.url }`
 
 
-	console.log(req.txt);
 }
 
 
