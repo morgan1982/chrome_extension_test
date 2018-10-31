@@ -1,0 +1,34 @@
+{
+	"manifest_version": 2,
+	"name": "budget",
+	"description": "budget app",
+	"version": "1.0",
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*/*"
+			],
+			"js": ["content.js"]
+		}
+	],
+	"icons": {
+		"128": "/assets/icon128.png",
+		"48": "/assets/icon48.png",
+		"16": "/assets/icon16.png"
+	},
+	"permissions": [
+		"activeTab", 
+		"storage"],
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"options_page": "options.html",
+	"browser_action": {
+		"default_title": "budget app",
+		"default_icon": {
+			"16": "/assets/icon16.png",
+			"48": "/assets/icon48.png",
+			"128": "/assets/icon128.png"
+		}
+	}	
+}
