@@ -1,11 +1,9 @@
-// console.log("run inside the script");
-
-// let sourceUrl = null; ?? gives error for double declaration
+// console.log("inside dropshie");
 
 chrome.runtime.onMessage.addListener(messageReceiver);
 
-function messageReceiver(request, sender, sendResponse) {
 
+function messageReceiver(request, sender, sendResponse) {
 
 	let { target } = request;
 
@@ -13,50 +11,42 @@ function messageReceiver(request, sender, sendResponse) {
 
 		// url of the source page
 		sourceUrl = request.url;
+		let { title } = request;
 	}
 
 
-// prepare the originMarketPlaceValue
-
-// HAVE TO CHANGE THAT TO USE THE VALUES OF THE COMBOBOX
-
-// let sources = [ "amazon.com", "amazon.co.uk", "ebay.com", "ebay.co.uk" ];
-
-// function checker(sub) {
-// 	let multChars = sub.split('.')
-// 	multChars.map( partial => {
-// 		if(sourceUrl.indexOf(partial) !== -1) {
-// 			return multChars >= 1;
-// 		}
-// 	})
-// }
-
-// let origin = sources.filter( source => {
-// 	return sourceUrl.indexOf(source) >= 1;
-// } )
-
-// console.log("the origin: ", origin);
-// have to change the output string to the correct format
 
 
 // HAVE TO MOVE TO ANOTHER FILE ***
-const sourceArr = ["amazon com", "amazon uk", "ebay com", "ebay co uk"];
+
+
+// format the origin marketplace to set value to combobox
+const sourceArr = [ "amazon com", 
+					"amazon uk", 
+					"ebay com", 
+					"ebay co uk", 
+					"wallmart",
+					"ebay us",
+					"ebay ca",
+					"ebay au",
+					"target",
+					"homedepot",
+					"overstock",
+					"amazon au",
+					"costco us"];
 
 
 function forFilter (sub) {
   
   // to fetch the values of each element of the array
   let partial = sub.split(" ");
-
   const testPartial = partial.map( keyword => {
 
-
-    // create the regex
-    let flags = "i";
-
-    re = new RegExp(keyword, flags);
-    // matches the provided string for every keyword seperated by space
-    return re.test(sourceUrl);
+		    // create the regex
+		    let flags = "i";
+		    re = new RegExp(keyword, flags);
+		    // matches the provided string for every keyword on each element
+		    return re.test(sourceUrl);
     
 	  })
 
@@ -70,8 +60,6 @@ function forFilter (sub) {
 
 // PREPARE THE ORIGIN
 const originSrc = sourceArr.filter(forFilter);
-console.log("originMarkerplace: ", originSrc[0]);
-
 const originMarkerplace = originSrc[0];
 
 
@@ -79,23 +67,23 @@ const originMarkerplace = originSrc[0];
 
 
 
-// INJECT VALUES TO THE FORM
+// INJECT VALUES TO THE DOM
 
-	function getElementByXpath(path) {
+function getElementByXpath(path) {
 
-		// dont need to use that. use the id or something
-	  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-		}
+	// dont need to use that. use the id or something
+	return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+	}
 
-		// product url 
-		let productUrl = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
-		productUrl.value += sourceUrl;
+// product url 
+let productUrl = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
+productUrl.value += sourceUrl;
 
-		// Origin MarketPlace
-		document.getElementById("MainContent_DropDownOriginMarketPlace").value = originMarkerplace;
+// Origin MarketPlace
+document.getElementById("MainContent_DropDownOriginMarketPlace").value = originMarkerplace;
 
-		// Template
-		document.getElementById("MainContent_DropDownTemplate").value = request.template;
+// Template
+document.getElementById("MainContent_DropDownTemplate").value = request.template;
 
 
 

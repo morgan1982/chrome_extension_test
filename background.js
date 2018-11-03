@@ -1,21 +1,18 @@
 
-// ebay developer pass : zftkg23@sw
 
-// cannot have a popup with an onclick event together
-// in order for the method to work have to remove the popup.html from the browseraction !!
-// if there is a popup maybe have to use another method
 chrome.browserAction.onClicked.addListener(executor);
 
 function executor (request, sender, sendResponse) {
 
 	console.log(chrome.tabs);
+
 	let { url, title } = request;
 
 	chrome.tabs.create({
+
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
 		active: true
 	}, (tab) => {
-		console.log("opened a new tab");
 
 		// execute the script after the tab is loaded
 		chrome.tabs.executeScript(tab.id, { file: "content.js" }, () => {
