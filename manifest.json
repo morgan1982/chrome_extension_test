@@ -1,14 +1,20 @@
 {
 	"manifest_version": 2,
-	"name": "budget",
-	"description": "budget app",
-	"version": "1.0",
+	"name": "testing_module",
+	"description": "testing filling the form from source",
+	"version": "0.01",
 	"content_scripts": [
 		{
 			"matches": [
-				"*://*/*"
+				"https://livetest.dropshie.com/*"
 			],
 			"js": ["content.js"]
+		},
+		{
+			"matches": [
+				"https://www.amazon.co.uk/*"
+			],
+			"js": ["content2.js"]
 		}
 	],
 	"icons": {
@@ -19,14 +25,15 @@
 	"permissions": [
 		"activeTab", 
 		"storage",
-		"tabs"
+		"tabs",
+		"https://livetest.dropshie.com/App/AddInventory.aspx"
 	],
 	"background": {
 		"scripts": ["background.js"]
 	},
 	"options_page": "options.html",
 	"browser_action": {
-		"default_title": "budget app",
+		"default_title": "some options",
 		"default_icon": {
 			"16": "/assets/icon16.png",
 			"48": "/assets/icon48.png",
