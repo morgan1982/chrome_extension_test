@@ -17,7 +17,6 @@ function messageReceiver(request, sender, sendResponse) {
 
 
 
-// HAVE TO MOVE TO ANOTHER FILE ***
 
 
 // format the origin marketplace to set value to combobox
@@ -36,6 +35,7 @@ const sourceArr = [ "amazon com",
 					"costco us"];
 
 
+// have to move a helper file ***
 function forFilter (sub) {
   
   // to fetch the values of each element of the array
@@ -81,10 +81,6 @@ productUrl.value += sourceUrl;
 
 // Origin MarketPlace
 document.getElementById("MainContent_DropDownOriginMarketPlace").value = originMarkerplace;
-
-// Template
-document.getElementById("MainContent_DropDownTemplate").value = request.template;
-
 
 
 }

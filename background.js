@@ -5,7 +5,6 @@ chrome.browserAction.onClicked.addListener(executor);
 
 function executor (request, sender, sendResponse) {
 
-	console.log(chrome.tabs);
 
 	let { url, title } = request;
 
