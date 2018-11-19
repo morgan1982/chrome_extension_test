@@ -32,7 +32,7 @@
 		"scripts": ["background.js"]
 	},
 	"options_page": "options.html",
-	"browser_action": {
+	"page_action": {
 		"default_title": "some options",
 		"default_icon": {
 			"16": "/assets/icon16.png",

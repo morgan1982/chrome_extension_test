@@ -11,6 +11,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 		// url of the source page
 		sourceUrl = request.url;
+		console.log(`test the url ${ sourceUrl }`);
 		let { title } = request;
 	}
 
@@ -23,7 +24,7 @@ function messageReceiver(request, sender, sendResponse) {
 const sourceArr = [ "amazon com", 
 					"amazon uk", 
 					"ebay com", 
-					"ebay co uk", 
+					"ebay uk", 
 					"wallmart",
 					"ebay us",
 					"ebay ca",
@@ -61,6 +62,7 @@ function forFilter (sub) {
 // PREPARE THE ORIGIN
 const originSrc = sourceArr.filter(forFilter);
 const originMarkerplace = originSrc[0];
+console.log(originMarkerplace);
 
 
 

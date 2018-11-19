@@ -1,13 +1,45 @@
 
 
-chrome.browserAction.onClicked.addListener(executor);
+chrome.pageAction.onClicked.addListener(executor);
+
+
+let urlExtensions = [
+	'.com', '.co.uk', '.ca'
+]
+
+// have to map the url patern to the urls
+// let urlPatern = 'https://www.'
+
+let validUrls = [
+	'https://www.ebay.com',
+	'https://www.ebay.co.uk',
+	'https://www.ebay.ca',
+	'https://www.ebay.de'
+]
+// show page action on certain urls
+function checkUrl(tabId, changeInfo, tab) {
+
+	validUrls.map( url => {
+
+		let regex = new RegExp(url + "/*");
+		// have to escape the regex
+
+		if (regex.test(tab.url)) {
+			chrome.pageAction.show(tabId)
+			}
+	})
+
+}
+
+chrome.tabs.onUpdated.addListener(checkUrl);
+
 
 
 function executor (request, sender, sendResponse) {
 
 
 	let { url, title } = request;
-
+	console.log(`testing the url ${ url }`);
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
