@@ -29,7 +29,7 @@
 		"https://livetest.dropshie.com/App/AddInventory.aspx"
 	],
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["sourceUrls.js", "background.js"]
 	},
 	"options_page": "options.html",
 	"page_action": {

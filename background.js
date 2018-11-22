@@ -1,4 +1,4 @@
-
+console.log(validUrls);
 
 chrome.pageAction.onClicked.addListener(executor);
 
@@ -7,18 +7,15 @@ let urlExtensions = [
 	'.com', '.co.uk', '.ca'
 ]
 
-// have to map the url patern to the urls
-// let urlPatern = 'https://www.'
 
-let validUrls = [
-	'https://www.ebay.com',
-	'https://www.ebay.co.uk',
-	'https://www.ebay.ca',
-	'https://www.ebay.de'
-]
+
+
+
+
 // show page action on certain urls
 function checkUrl(tabId, changeInfo, tab) {
 
+	// validUrls are injected from sourceUrls.js
 	validUrls.map( url => {
 
 		let regex = new RegExp(url + "/*");
