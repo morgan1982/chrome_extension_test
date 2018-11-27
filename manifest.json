@@ -14,6 +14,7 @@
 			"matches": [
 				"https://www.amazon.co.uk/*"
 			],
+			"css": ["content.css"],
 			"js": ["content2.js"]
 		}
 	],
@@ -23,7 +24,7 @@
 		"16": "/assets/icon16.png"
 	},
 	"permissions": [
-		"activeTab", 
+		"activeTab",
 		"storage",
 		"tabs",
 		"https://livetest.dropshie.com/App/AddInventory.aspx"
@@ -39,5 +40,5 @@
 			"48": "/assets/icon48.png",
 			"128": "/assets/icon128.png"
 		}
-	}	
+	}
 }

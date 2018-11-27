@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    color: #312f2f;
+}
+
+.product_title {
+    display: flex;
+}
+
+.dropshie_btn {
+    display: flex;
+    margin-left: .9rem;
+    /*text-transform: uppercase;*/
+    /*border: 1px solid #3e505b;*/
+    border-radius: .4rem;
+    padding: .5rem;
+    height: 2rem;
+    /*width: 10rem;*/
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
+    background: #49b3b1;
+    /*border: 1px solid #777;*/
+    color: white;
+    animation: appear .4s ease-out;
+    cursor: pointer;
+}
+.dropshie_btn:hover {
+    box-shadow: 0 1px 8px rgba(0, 0, 0,.2);
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-10rem);
+    }
+
+    80% {
+        transform: translateY(.5rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
