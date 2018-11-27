@@ -2,23 +2,33 @@ console.log("inside amazon");
 
 
 // have to config the selectors for the other sources
+// have to import domains from sourceUrls.js
+// change the title element in response the url
+// have to add a tooltip to the pageaction to isntruct the user
 
-// for amazon
+// amazon.com --- id = productTitle
+
+// for amazon.co.uk
 let title = document.getElementById('title');
 
 if (title) {
     title.className += title.className ? ' product_title' : 'product_title';
 }
-// title.style.display = 'flex';
 
-
-// create the button
+// btn
 let btn = document.createElement('div');
 btn.className = 'dropshie_btn';
-// btn.style.marginLeft = '1.2em';
 let btnText = document.createTextNode("add");
 btn.appendChild(btnText);
+
 title.appendChild(btn)
+
+btn.addEventListener('click', () => {
+    let url = window.location.href;
+    console.log("add the product")
+    console.log('the url', url);
+    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url })
+})
 
 
 

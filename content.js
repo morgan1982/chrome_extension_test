@@ -12,7 +12,7 @@ function messageReceiver(request, sender, sendResponse) {
 		// url of the source page
 		sourceUrl = request.url;
 		console.log(`test the url ${ sourceUrl }`);
-		let { title } = request;
+		// let { title } = request;
 	}
 
 
@@ -21,10 +21,10 @@ function messageReceiver(request, sender, sendResponse) {
 
 
 // format the origin marketplace to set value to combobox
-const sourceArr = [ "amazon com", 
-					"amazon uk", 
-					"ebay com", 
-					"ebay uk", 
+const sourceArr = [ "amazon com",
+					"amazon uk",
+					"ebay com",
+					"ebay uk",
 					"wallmart",
 					"ebay us",
 					"ebay ca",
@@ -38,7 +38,7 @@ const sourceArr = [ "amazon com",
 
 // have to move a helper file ***
 function forFilter (sub) {
-  
+
   // to fetch the values of each element of the array
   let partial = sub.split(" ");
   const testPartial = partial.map( keyword => {
@@ -48,7 +48,7 @@ function forFilter (sub) {
 		    re = new RegExp(keyword, flags);
 		    // matches the provided string for every keyword on each element
 		    return re.test(sourceUrl);
-    
+
 	  })
 
   // test if all values of the element are matched
@@ -56,7 +56,7 @@ function forFilter (sub) {
   	return sub;
   }
 
-  
+
 }
 
 // PREPARE THE ORIGIN
@@ -77,7 +77,7 @@ function getElementByXpath(path) {
 	return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 	}
 
-// product url 
+// product url
 let productUrl = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
 productUrl.value += sourceUrl;
 

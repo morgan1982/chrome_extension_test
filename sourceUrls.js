@@ -16,9 +16,10 @@ const domains = [
 // couldn't find overstock australia
 const validUrls = []
 
+// maybe inefficient
 domains.forEach( url => {
 	validUrls.push(`https://www.${url}`)
-}) 
+})
 
 
 

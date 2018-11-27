@@ -1,14 +1,4 @@
-console.log(validUrls);
-
-chrome.pageAction.onClicked.addListener(executor);
-
-
-let urlExtensions = [
-	'.com', '.co.uk', '.ca'
-]
-
-
-
+chrome.pageAction.onClicked.addListener(tabCreator);
 
 
 
@@ -32,11 +22,13 @@ chrome.tabs.onUpdated.addListener(checkUrl);
 
 
 
-function executor (request, sender, sendResponse) {
+
+function tabCreator (request, sender, sendResponse) {
 
 
 	let { url, title } = request;
 	console.log(`testing the url ${ url }`);
+	console.log(`the title: ${ title }`);
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
@@ -50,7 +42,7 @@ function executor (request, sender, sendResponse) {
 				target: "dropshie",
 				url,
 				title
-			})			
+			})
 		})
 
 
@@ -63,10 +55,16 @@ function executor (request, sender, sendResponse) {
 
 
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
-	console.log(req);
-	if (req.greeting === "hello there") {
-		console.log(req.greeting)
-		sendResponse({ message: "hello from background.js" })
+
+	console.log('the req from the page: ', req)
+	let { url, target } = req;
+
+	console.log(`the url ${ url } the target: ${ target }`);
+
+	if (req.message === "add") {
+		// create the tab
+		tabCreator(req, sender, sendResponse);
+		sendResponse({ message: "product added" })
 	}
 })
 
