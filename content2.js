@@ -1,5 +1,8 @@
 console.log("inside amazon");
 
+let title = document.getElementById('title');
+console.log(title);
+
 
 function messageReceiver (request, sender, sendResponse) {
 
@@ -7,7 +10,7 @@ function messageReceiver (request, sender, sendResponse) {
 	if (request.message === "hello from background.js") {
 		console.log("fine")
 	}
-} 
+}
 
 
 chrome.runtime.onMessage.addListener(messageReceiver);
