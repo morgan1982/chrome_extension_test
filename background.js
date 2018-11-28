@@ -9,7 +9,6 @@ function checkUrl(tabId, changeInfo, tab) {
 	validUrls.map( url => {
 
 		let regex = new RegExp(url + "/*");
-		// have to escape the regex
 
 		if (regex.test(tab.url)) {
 			chrome.pageAction.show(tabId)
@@ -27,8 +26,7 @@ function tabCreator (request, sender, sendResponse) {
 
 
 	let { url, title } = request;
-	console.log(`testing the url ${ url }`);
-	console.log(`the title: ${ title }`);
+
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
@@ -56,10 +54,10 @@ function tabCreator (request, sender, sendResponse) {
 
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 
-	console.log('the req from the page: ', req)
+	// console.log('the req from the page: ', req)
 	let { url, target } = req;
 
-	console.log(`the url ${ url } the target: ${ target }`);
+	// console.log(`the url ${ url } the target: ${ target }`);
 
 	if (req.message === "add") {
 		// create the tab

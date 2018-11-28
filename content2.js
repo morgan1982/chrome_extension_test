@@ -25,8 +25,7 @@ title.appendChild(btn)
 
 btn.addEventListener('click', () => {
     let url = window.location.href;
-    console.log("add the product")
-    console.log('the url', url);
+
     chrome.runtime.sendMessage({ message: "add", target: "dropshie", url })
 })
 
