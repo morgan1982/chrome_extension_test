@@ -13,6 +13,7 @@ const domains = [
 	'thinkgeek.com'
 ]
 
+
 // couldn't find overstock australia
 const validUrls = []
 

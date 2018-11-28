@@ -12,10 +12,12 @@
 		},
 		{
 			"matches": [
-				"https://www.amazon.co.uk/*"
+				"https://www.amazon.co.uk/*",
+				"https://www.amazon.com/*",
+				"https://www.ebay.co.uk/*"
 			],
 			"css": ["content.css"],
-			"js": ["content2.js"]
+			"js": ["sourceUrls.js", "content2.js"]
 		}
 	],
 	"icons": {

@@ -11,8 +11,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 		// url of the source page
 		sourceUrl = request.url;
-		console.log(`test the url ${ sourceUrl }`);
-		// let { title } = request;
+		// console.log(`test the url ${ sourceUrl }`);
 	}
 
 
@@ -62,9 +61,29 @@ function forFilter (sub) {
 // PREPARE THE ORIGIN
 const originSrc = sourceArr.filter(forFilter);
 const originMarkerplace = originSrc[0];
+
+
+// convert com to us
+function convertToUs(src) {
+	let ar = src.split(' ');
+	console.log("the src", ar);
+
+	if (ar[1] === 'com') {
+		ar[1] = 'us'
+		console.log('inside converter', ar)
+		let new_str = ar.join(' ')
+			return new_str	
+		}
+}
+
+
+// fix the bug!!
+let newStr = convertToUs(originMarkerplace);
+console.log('converted', newStr);
+
+
+
 console.log(originMarkerplace);
-
-
 
 
 
@@ -82,10 +101,16 @@ let productUrl = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
 productUrl.value += sourceUrl;
 
 // Origin MarketPlace
+
+
+
 document.getElementById("MainContent_DropDownOriginMarketPlace").value = originMarkerplace;
 
 
 }
+
+// execute after the form is filled
+// click the add btn
 
 
 
