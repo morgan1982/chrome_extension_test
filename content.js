@@ -25,14 +25,14 @@ const sourceArr = [ "amazon com",
 					"ebay com",
 					"ebay uk",
 					"wallmart",
-					"ebay us",
+					"ebay com",
 					"ebay ca",
 					"ebay au",
 					"target",
 					"homedepot",
 					"overstock",
 					"amazon au",
-					"costco us"];
+					"costco com"];
 
 
 // have to move a helper file ***
@@ -68,22 +68,24 @@ function convertToUs(src) {
 	let ar = src.split(' ');
 	console.log("the src", ar);
 
+
 	if (ar[1] === 'com') {
 		ar[1] = 'us'
 		console.log('inside converter', ar)
 		let new_str = ar.join(' ')
-			return new_str	
+			return new_str
+		}else {
+			return ar.join(' ')
 		}
 }
 
 
 // fix the bug!!
-let newStr = convertToUs(originMarkerplace);
-console.log('converted', newStr);
+let origin = convertToUs(originMarkerplace);
+console.log('converted', origin);
 
 
 
-console.log(originMarkerplace);
 
 
 
@@ -104,7 +106,7 @@ productUrl.value += sourceUrl;
 
 
 
-document.getElementById("MainContent_DropDownOriginMarketPlace").value = originMarkerplace;
+document.getElementById("MainContent_DropDownOriginMarketPlace").value = origin;
 
 
 }
