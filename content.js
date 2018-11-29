@@ -60,6 +60,7 @@ function forFilter (sub) {
 
 // PREPARE THE ORIGIN
 const originSrc = sourceArr.filter(forFilter);
+console.log(`origin shource ${ originSrc }`);
 const originMarkerplace = originSrc[0];
 
 
@@ -80,18 +81,19 @@ function convertToUs(src) {
 }
 
 
-// fix the bug!!
-let origin = convertToUs(originMarkerplace);
-console.log('converted', origin);
 
+let origin;
+if (originMarkerplace.includes('com')) {
 
-
-
+	origin = convertToUs(originMarkerplace);
+	console.log('converted', origin);
+} else {
+	origin = originMarkerplace;
+}
 
 
 
 // INJECT VALUES TO THE DOM
-
 function getElementByXpath(path) {
 
 	// dont need to use that. use the id or something
@@ -103,9 +105,6 @@ let productUrl = getElementByXpath("//*[@id=\"MainContent_TextBoxFrom\"]");
 productUrl.value += sourceUrl;
 
 // Origin MarketPlace
-
-
-
 document.getElementById("MainContent_DropDownOriginMarketPlace").value = origin;
 
 

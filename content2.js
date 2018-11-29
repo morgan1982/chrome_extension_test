@@ -5,7 +5,7 @@ console.log("inside amazon");
 
 // currentUrl
 const currentUrl = window.location.href;
-	
+
 // imported from sourceUrls.js
 const sourceDomains = domains
 
@@ -17,10 +17,10 @@ function companyNameExtractor(domains) {
 	for (company of domains) {
 
 		let name = company.split('.')[0]
-		
+
 
 		if (!companies.includes(name)) {
-			companies.push(name)						  		
+			companies.push(name)
 		}
 
 	}
@@ -44,19 +44,25 @@ function currentDomainFinder( sourceDomains, url) {
 
 }
 
-// return the title element of the page 
+// return the title element of the page
 function getTitle(domainName) {
 		let title = null;
 
+
 		switch (domainName) {
 
+            // have to add the other suppliers
 			case "amazon":
-				title = document.querySelector('#title');
+				title = document.querySelector('#titleSection');
 				break;
 			case "ebay":
 				title = document.querySelector('#itemTitle');
-				break	
-			
+				break
+            case "homedepot":
+                title = document.querySelector('.product-title');
+            case "walmart":
+                title = document.querySelector('.ProductTitle');
+
 		}
 
 		if (title) {
@@ -67,14 +73,19 @@ function getTitle(domainName) {
 
 }
 
-function injectButton(title) {
 
+function injectButton(title) {
+    // fix the home element to homdepot and ebay
+    let btnContainer = document.createElement('div');
+    btnContainer.className = 'dropshie_btn_container'
 	let btn = document.createElement('div');
 	btn.className = 'dropshie_btn';
 	let btnText = document.createTextNode("add");
 	btn.appendChild(btnText);
+    btnContainer.appendChild(btn)
 
-	title.appendChild(btn)
+    // title.parentNode.insertBefore(btnContainer, title.nextSibling);
+	title.appendChild(btnContainer)
 
 	btn.addEventListener('click', () => {
 
@@ -91,10 +102,10 @@ function injectButton(title) {
 // returns the domainName of the current page
 const currentDomain = currentDomainFinder( companyNameExtractor(sourceDomains), currentUrl);
 
-// get the title element 
+// get the title element
 let title = getTitle(currentDomain);
 
-// add btn next to the title of the page 
+// add btn next to the title of the page
 injectButton(title);
 
 

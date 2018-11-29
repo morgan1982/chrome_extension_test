@@ -12,18 +12,22 @@ body {
 }
 
 .product_title {
-    display: flex;
+    /*display: flex;*/
+}
+.btn_container {
+    display: inline-block;
+
 }
 
 .dropshie_btn {
+    /*display: inline-block;*/
+    /*float: right;*/
     display: flex;
     margin-left: .9rem;
-    /*text-transform: uppercase;*/
-    /*border: 1px solid #3e505b;*/
     border-radius: .4rem;
     padding: .5rem;
-    height: 2rem;
-    /*width: 10rem;*/
+    height: 3em;
+    /*width: 2.3rem;*/
     align-items: center;
     justify-content: center;
     font-size: .8rem;

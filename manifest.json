@@ -14,7 +14,10 @@
 			"matches": [
 				"https://www.amazon.co.uk/*",
 				"https://www.amazon.com/*",
-				"https://www.ebay.co.uk/*"
+				"https://www.ebay.co.uk/*",
+				"https://www.ebay.com/*",
+				"https://www.homedepot.com/*",
+				"https://www.walmart.com/*"
 			],
 			"css": ["content.css"],
 			"js": ["sourceUrls.js", "content2.js"]
