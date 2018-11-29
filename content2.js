@@ -76,16 +76,25 @@ function getTitle(domainName) {
 
 function injectButton(title) {
     // fix the home element to homdepot and ebay
-    let btnContainer = document.createElement('div');
-    btnContainer.className = 'dropshie_btn_container'
-	let btn = document.createElement('div');
-	btn.className = 'dropshie_btn';
+
 	let btnText = document.createTextNode("add");
+
+	let btn = document.createElement('div');
+		btn.setAttribute('class', 'dropshie_btn');
+	
 	btn.appendChild(btnText);
-    btnContainer.appendChild(btn)
+	console.log(`btn ${ btn }`);
+
+    let btnContainer = document.createElement('div')
+		btnContainer.setAttribute('class', 'dropshie_btn_container')
+    
+    btnContainer.appendChild(btn);
+	console.log(`btnContainer ${ btnContainer }`);
+
+
 
     // title.parentNode.insertBefore(btnContainer, title.nextSibling);
-	title.appendChild(btnContainer)
+	title.appendChild(btnContainer);
 
 	btn.addEventListener('click', () => {
 
@@ -106,9 +115,9 @@ const currentDomain = currentDomainFinder( companyNameExtractor(sourceDomains), 
 let title = getTitle(currentDomain);
 
 // add btn next to the title of the page
-injectButton(title);
-
-
+if (title) {
+	injectButton(title);
+}
 
 
 // chrome.runtime.onMessage.addListener(messageReceiver);
