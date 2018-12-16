@@ -14,6 +14,7 @@ const sourceDomains = domains
 function companyNameExtractor(domains) {
 
 	const companies = [];
+	let company = null;
 	for (company of domains) {
 
 		let name = company.split('.')[0]
@@ -30,9 +31,9 @@ function companyNameExtractor(domains) {
 // extract the company_name from the current url
 function currentDomainFinder( sourceDomains, url) {
 
-
+	let domain = null;
 	// select the correct domain
-	for (domain of sourceDomains) {
+	for ( domain of sourceDomains) {
 			let re = new RegExp(domain)
 
 			if (re.test(url)) {
@@ -59,7 +60,8 @@ function getTitle(domainName) {
 				title = document.querySelector('#itemTitle');
 				break
             case "homedepot":
-                title = document.querySelector('.product-title');
+                title = document.querySelector('.manufacturer-name__with_reviews');
+                break
             case "walmart":
                 // title = document.querySelector('.ProductTitle');
                 title = document.querySelector('.prod-TitleSection');
@@ -77,7 +79,7 @@ function getTitle(domainName) {
 
 function injectButton(title) {
     // fix the home element to homdepot and ebay
-
+	console.log("the title of the page", title)
 	let btnText = document.createTextNode("add");
 
 	let btn = document.createElement('div');

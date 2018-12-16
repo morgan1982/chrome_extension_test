@@ -118,9 +118,9 @@ function messageReceiver(request, sender, sendResponse) {
 
 		console.log('running the submit handler')
 		try {
-			// document.forms[0].submit()
-			let btn = document.getElementById('MainContent_ButtonSubmit')
-			btn.click()
+			document.forms[0].submit()
+			// let btn = document.getElementById('MainContent_ButtonSubmit')
+			// btn.click()
 		} catch {
 			throw new Error("cannot submit the form")
 		}
