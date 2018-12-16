@@ -1,4 +1,4 @@
-console.log("inside amazon");
+console.log("inside source");
 
 
 // ebay id = itemTitle
@@ -61,7 +61,8 @@ function getTitle(domainName) {
             case "homedepot":
                 title = document.querySelector('.product-title');
             case "walmart":
-                title = document.querySelector('.ProductTitle');
+                // title = document.querySelector('.ProductTitle');
+                title = document.querySelector('.prod-TitleSection');
 
 		}
 
@@ -81,13 +82,13 @@ function injectButton(title) {
 
 	let btn = document.createElement('div');
 		btn.setAttribute('class', 'dropshie_btn');
-	
+
 	btn.appendChild(btnText);
 	console.log(`btn ${ btn }`);
 
     let btnContainer = document.createElement('div')
 		btnContainer.setAttribute('class', 'dropshie_btn_container')
-    
+
     btnContainer.appendChild(btn);
 	console.log(`btnContainer ${ btnContainer }`);
 

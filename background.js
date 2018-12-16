@@ -30,7 +30,7 @@ function tabCreator (request, sender, sendResponse) {
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
-		active: true
+		active: true // sets the tab to be active
 	}, (tab) => {
 
 		// execute the script after the tab is loaded
@@ -54,7 +54,6 @@ function tabCreator (request, sender, sendResponse) {
 
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 
-	// console.log('the req from the page: ', req)
 	let { url, target } = req;
 
 	// console.log(`the url ${ url } the target: ${ target }`);

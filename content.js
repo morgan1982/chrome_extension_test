@@ -1,7 +1,7 @@
-// console.log("inside dropshie");
+console.log("inside dropshie");
 
 chrome.runtime.onMessage.addListener(messageReceiver);
-
+// let sourceUrl;
 
 function messageReceiver(request, sender, sendResponse) {
 
@@ -11,7 +11,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 		// url of the source page
 		sourceUrl = request.url;
-		// console.log(`test the url ${ sourceUrl }`);
+		console.log(`test the url ${ sourceUrl }`);
 	}
 
 
@@ -35,7 +35,7 @@ function messageReceiver(request, sender, sendResponse) {
 						"costco com"];
 
 
-	// have to move a helper file ***
+	// have to move to a helper file ***
 	function forFilter (sub) {
 
 	  // to fetch the values of each element of the array
@@ -44,7 +44,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 			    // create the regex
 			    let flags = "i";
-			    re = new RegExp(keyword, flags);
+			    let re = new RegExp(keyword, flags);
 			    // matches the provided string for every keyword on each element
 			    return re.test(sourceUrl);
 
@@ -64,7 +64,7 @@ function messageReceiver(request, sender, sendResponse) {
 	const originMarkerplace = originSrc[0];
 
 
-	// convert com to us
+	// convert com to us  ( combobox needs us as a value )
 	function convertToUs(src) {
 		let ar = src.split(' ');
 		console.log("the src", ar);
@@ -82,7 +82,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 
 
-// convert to us if there is com extension 
+// convert to us if there is com extension
 	let origin;
 	if (originMarkerplace.includes('com')) {
 
@@ -97,15 +97,18 @@ function messageReceiver(request, sender, sendResponse) {
 
 		// product url
 		let productUrl = document.querySelector('#MainContent_TextBoxFrom');
-		productUrl.value += sourceUrl;
+		productUrl.value += source;
 
 		// Origin MarketPlace
 		let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
 		originMarket.value = origin;
-		if ( productUrl.value === sourceUrl && originMarket.value === origin ) {
-			callback();		
-		} 
-		
+		console.log("filling the form...")
+		if ( productUrl.value === source && originMarket.value === origin ) {
+			setTimeout(() => {
+				callback();
+			}, 500)
+		}
+
 	}
 
 
@@ -120,7 +123,7 @@ function messageReceiver(request, sender, sendResponse) {
 			btn.click()
 		} catch {
 			throw new Error("cannot submit the form")
-		}		
+		}
 	})
 
 }
