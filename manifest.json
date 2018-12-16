@@ -17,7 +17,14 @@
 				"https://www.ebay.co.uk/*",
 				"https://www.ebay.com/*",
 				"https://www.homedepot.com/*",
-				"https://www.walmart.com/*"
+				"https://www.walmart.com/*",
+				"https://www.aosom.co.uk/*",
+				"https://www.target.com/*",
+				"https://www.zooplus.com/*",
+				"https://www.petplanet.co.uk/*"
+
+
+
 			],
 			"css": ["content.css"],
 			"js": ["sourceUrls.js", "content2.js"]

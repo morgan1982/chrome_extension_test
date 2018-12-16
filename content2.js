@@ -1,4 +1,5 @@
 console.log("inside source");
+// alert("inside source");
 
 
 // ebay id = itemTitle
@@ -41,7 +42,7 @@ function currentDomainFinder( sourceDomains, url) {
 			}
 	}
 	return domain
-	// console.log(`the matched domain ${ domain }`);
+	console.log(`the matched domain ${ domain }`);
 
 }
 
@@ -63,8 +64,23 @@ function getTitle(domainName) {
                 title = document.querySelector('.manufacturer-name__with_reviews');
                 break
             case "walmart":
-                // title = document.querySelector('.ProductTitle');
                 title = document.querySelector('.prod-TitleSection');
+                break
+            case "target":
+                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
+                break
+            case "costco":
+                title = document.querySelector('.product-h1-container');
+                break
+            case "zooplus":
+                title = document.querySelector('.product__description');
+                break
+            case "aosom":
+                title = document.querySelector('.product-name');
+                break
+            case "petplanet":
+                title = document.querySelector('.container--product-name');
+                break
 
 		}
 
@@ -78,7 +94,7 @@ function getTitle(domainName) {
 
 
 function injectButton(title) {
-    // fix the home element to homdepot and ebay
+
 	console.log("the title of the page", title)
 	let btnText = document.createTextNode("add");
 
