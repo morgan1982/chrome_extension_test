@@ -8,8 +8,10 @@ console.log("inside source");
 const currentUrl = window.location.href;
 
 // imported from sourceUrls.js
-const sourceDomains = domains
+// consider using generator function
 
+// const sourceDomains = domains
+// alert(domains)
 
 // fetch the names of the companies
 function companyNameExtractor(domains) {
@@ -24,9 +26,9 @@ function companyNameExtractor(domains) {
 		if (!companies.includes(name)) {
 			companies.push(name)
 		}
-
+		// alert(companies);
 	}
-	return companies;
+	return companies; // returns a array of companies
 }
 
 // extract the company_name from the current url
@@ -41,6 +43,8 @@ function currentDomainFinder( sourceDomains, url) {
 				break;
 			}
 	}
+    
+
 	return domain
 	console.log(`the matched domain ${ domain }`);
 
@@ -130,10 +134,10 @@ function injectButton(title) {
 
 // LOGIC
 
-// parameter: list of companies
+// parameter: list of companies -- domains declared in sourceUrls.js
 // parameter: current page url
 // returns the domainName of the current page
-const currentDomain = currentDomainFinder( companyNameExtractor(sourceDomains), currentUrl);
+const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
 // get the title element
 let title = getTitle(currentDomain);
