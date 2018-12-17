@@ -70,7 +70,7 @@ function getTitle(domainName) {
                 title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
                 break
             case "costco":
-                title = document.querySelector('.product-h1-container');
+                title = document.querySelector('.bazaar-voice');
                 break
             case "zooplus":
                 title = document.querySelector('.product__description');
@@ -81,7 +81,12 @@ function getTitle(domainName) {
             case "petplanet":
                 title = document.querySelector('.container--product-name');
                 break
-
+            case "thinkgeek":
+                title = document.querySelector('.header');
+                break
+            case "vidaxl":
+                title = document.querySelector('.header');
+                break
 		}
 
 		if (title) {
@@ -95,7 +100,7 @@ function getTitle(domainName) {
 
 function injectButton(title) {
 
-	console.log("the title of the page", title)
+
 	let btnText = document.createTextNode("add");
 
 	let btn = document.createElement('div');

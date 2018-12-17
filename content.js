@@ -92,39 +92,65 @@ function messageReceiver(request, sender, sendResponse) {
 		origin = originMarkerplace;
 	}
 
+	function formInputHandler(source, origin) {
 
-	function formInputHandler(source, origin, callback) {
+		return new Promise((resolve, reject) => {
 
-		// product url
-		let productUrl = document.querySelector('#MainContent_TextBoxFrom');
-		productUrl.value += source;
+			let productUrl = document.querySelector('#MainContent_TextBoxFrom');
+			productUrl.value += source;
+			let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
+			originMarket.value = origin;
 
-		// Origin MarketPlace
-		let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
-		originMarket.value = origin;
-		console.log("filling the form...")
-		if ( productUrl.value === source && originMarket.value === origin ) {
-			setTimeout(() => {
-				callback();
-			}, 500)
-		}
+			if ( productUrl.value === source && originMarket.value === origin ) {
+
+				resolve();
+
+				}
+		})
 
 	}
+
+	formInputHandler(sourceUrl, origin)
+		.then(() => {
+			let btn = document.getElementById('MainContent_ButtonSubmit')
+			btn.click()
+		}).catch( er => console.log(er))
+
+
+
+
+	// function formInputHandler(source, origin, callback) {
+
+	// 	// product url
+	// 	let productUrl = document.querySelector('#MainContent_TextBoxFrom');
+	// 	productUrl.value += source;
+
+	// 	// Origin MarketPlace
+	// 	let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
+	// 	originMarket.value = origin;
+	// 	console.log("filling the form...")
+	// 	if ( productUrl.value === source && originMarket.value === origin ) {
+	// 		setTimeout(() => {
+	// 			callback();
+	// 		}, 500)
+	// 	}
+
+	// }
 
 
 
 	// fill the form and sumbit the form
-	formInputHandler(sourceUrl, origin, () => {
+// 	formInputHandler(sourceUrl, origin, () => {
 
-		console.log('running the submit handler')
-		try {
-			// document.forms[0].submit()
-			let btn = document.getElementById('MainContent_ButtonSubmit')
-			btn.click()
-		} catch {
-			throw new Error("cannot submit the form")
-		}
-	})
+// 		console.log('running the submit handler')
+// 		try {
+// 			// document.forms[0].submit()
+// 			let btn = document.getElementById('MainContent_ButtonSubmit')
+// 			btn.click()
+// 		} catch {
+// 			throw new Error("cannot submit the form")
+// 		}
+// 	})
 
 }
 

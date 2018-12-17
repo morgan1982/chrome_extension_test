@@ -3,6 +3,7 @@
 .product_title {
     /*display: flex;*/
 }
+
 .dropshie_btn_container {
     display: inline-block;
     float: right;
@@ -24,6 +25,7 @@
     animation: appear .4s ease-out;
     cursor: pointer;
 }
+
 .dropshie_btn:hover {
     box-shadow: 0px 1px 8px rgba(0, 0, 0, .2);
 }
