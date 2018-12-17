@@ -34,7 +34,7 @@ function tabCreator (request, sender, sendResponse) {
 	}, (tab) => {
 
 		// execute the script after the tab is loaded
-		chrome.tabs.executeScript(tab.id, { file: "content.js" }, () => {
+		chrome.tabs.executeScript(tab.id, { file: "targetDropshie.js" }, () => {
 
 			chrome.tabs.sendMessage(tab.id, {
 				target: "dropshie",

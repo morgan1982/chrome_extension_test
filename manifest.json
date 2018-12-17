@@ -8,12 +8,14 @@
 			"matches": [
 				"https://livetest.dropshie.com/*"
 			],
-			"js": ["content.js"]
+			"js": ["targetDropshie.js"]
 		},
 		{
 			"matches": [
 				"https://www.amazon.co.uk/*",
 				"https://www.amazon.com/*",
+				"https://www.amazon.com.au/*",
+				"https://www.amazon.ca/*",
 				"https://www.ebay.co.uk/*",
 				"https://www.ebay.com/*",
 				"https://www.homedepot.com/*",
@@ -26,6 +28,7 @@
 				"https://www.petplanet.co.uk/*",
 				"https://www.thinkgeek.com/*",
 				"https://www.vidaxl.com/*",
+				"https://www.vidaxl.co.uk/*",
 				"https://www.costco.com/*"
 
 
@@ -35,7 +38,7 @@
 
 			],
 			"css": ["content.css"],
-			"js": ["sourceUrls.js", "content2.js"]
+			"js": ["sourceUrls.js", "sourceDomain.js"]
 		}
 	],
 	"icons": {

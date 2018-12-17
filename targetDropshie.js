@@ -20,11 +20,17 @@ function messageReceiver(request, sender, sendResponse) {
 
 
 	// format the origin marketplace to set value to combobox
+	// fill new domains here in order to select the correct domain
 	const sourceArr = [ "amazon com",
 						"amazon uk",
+						"amazon ca",
+						"amazon au",
+						"costco com",
+						"costco uk",
+						"costco ca",
 						"ebay com",
 						"ebay uk",
-						"wallmart",
+						"walmart",
 						"ebay com",
 						"ebay ca",
 						"ebay au",
@@ -32,7 +38,7 @@ function messageReceiver(request, sender, sendResponse) {
 						"homedepot",
 						"overstock",
 						"amazon au",
-						"costco com"];
+						"vidaxl uk"];
 
 
 	// have to move to a helper file ***
@@ -60,15 +66,13 @@ function messageReceiver(request, sender, sendResponse) {
 
 	// PREPARE THE ORIGIN
 	const originSrc = sourceArr.filter(forFilter);
-	console.log(`origin shource ${ originSrc }`);
+	console.log(`origin shource: ${ originSrc }`);
 	const originMarkerplace = originSrc[0];
 
 
-	// convert com to us  ( combobox needs us as a value )
+
 	function convertToUs(src) {
 		let ar = src.split(' ');
-		console.log("the src", ar);
-
 
 		if (ar[1] === 'com') {
 			ar[1] = 'us'
@@ -79,15 +83,16 @@ function messageReceiver(request, sender, sendResponse) {
 				return ar.join(' ')
 			}
 	}
+// -- current combobox values --
+// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca, costco uk,  costco us
+// ebay ca, ebay uk, ebay us, ebay au, homedepot (ok), overstock ca, overstock, target, target au
+// vidaxl uk, vidaxl us, vidaxl au
 
 
-
-// convert to us if there is com extension
+// convert to us if there is com extension *combobox needs the value 'us'
 	let origin;
 	if (originMarkerplace.includes('com')) {
-
 		origin = convertToUs(originMarkerplace);
-		console.log('converted', origin);
 	} else {
 		origin = originMarkerplace;
 	}
@@ -117,40 +122,6 @@ function messageReceiver(request, sender, sendResponse) {
 		}).catch( er => console.log(er))
 
 
-
-
-	// function formInputHandler(source, origin, callback) {
-
-	// 	// product url
-	// 	let productUrl = document.querySelector('#MainContent_TextBoxFrom');
-	// 	productUrl.value += source;
-
-	// 	// Origin MarketPlace
-	// 	let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
-	// 	originMarket.value = origin;
-	// 	console.log("filling the form...")
-	// 	if ( productUrl.value === source && originMarket.value === origin ) {
-	// 		setTimeout(() => {
-	// 			callback();
-	// 		}, 500)
-	// 	}
-
-	// }
-
-
-
-	// fill the form and sumbit the form
-// 	formInputHandler(sourceUrl, origin, () => {
-
-// 		console.log('running the submit handler')
-// 		try {
-// 			// document.forms[0].submit()
-// 			let btn = document.getElementById('MainContent_ButtonSubmit')
-// 			btn.click()
-// 		} catch {
-// 			throw new Error("cannot submit the form")
-// 		}
-// 	})
 
 }
 

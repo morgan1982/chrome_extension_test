@@ -1,18 +1,10 @@
 console.log("inside source");
-// alert("inside source");
 
 
-// ebay id = itemTitle
-
-// currentUrl
+// the url of the tab
 const currentUrl = window.location.href;
 
-// imported from sourceUrls.js
 // consider using generator function
-
-// const sourceDomains = domains
-// alert(domains)
-
 // fetch the names of the companies
 function companyNameExtractor(domains) {
 
@@ -26,7 +18,7 @@ function companyNameExtractor(domains) {
 		if (!companies.includes(name)) {
 			companies.push(name)
 		}
-		// alert(companies);
+
 	}
 	return companies; // returns a array of companies
 }
@@ -35,6 +27,18 @@ function companyNameExtractor(domains) {
 function currentDomainFinder( sourceDomains, url) {
 
 	let domain = null;
+	// handle the different extensions for walmart
+
+	console.log(`url is: ${ url }`);
+	if ( url.includes("walmart") && url.includes("ca") ) {
+		domain = "walmart_ca";
+		return domain
+	}
+	if ( url.includes("walmart") && url.includes("com") ) {
+		domain = "walmart_com";
+		return domain
+	}
+
 	// select the correct domain
 	for ( domain of sourceDomains) {
 			let re = new RegExp(domain)
@@ -43,16 +47,16 @@ function currentDomainFinder( sourceDomains, url) {
 				break;
 			}
 	}
-    
+
 
 	return domain
-	console.log(`the matched domain ${ domain }`);
 
 }
 
 // return the title element of the page
 function getTitle(domainName) {
 		let title = null;
+		console.log(`the domainName for switch: ${ domainName }`)
 
 
 		switch (domainName) {
@@ -67,8 +71,11 @@ function getTitle(domainName) {
             case "homedepot":
                 title = document.querySelector('.manufacturer-name__with_reviews');
                 break
-            case "walmart":
+            case "walmart_com":
                 title = document.querySelector('.prod-TitleSection');
+                break
+            case "walmart_ca":
+                title = document.querySelector('#product-desc');
                 break
             case "target":
                 title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
@@ -89,14 +96,14 @@ function getTitle(domainName) {
                 title = document.querySelector('.header');
                 break
             case "vidaxl":
-                title = document.querySelector('.header');
+                title = document.querySelector('.container-top');
                 break
 		}
 
 		if (title) {
 			    title.className += title.className ? ' product_title' : 'product_title';
 			}
-
+		console.log("prepared title", title)
 		return title;
 
 }
@@ -132,14 +139,14 @@ function injectButton(title) {
 
 }
 
-// LOGIC
 
-// parameter: list of companies -- domains declared in sourceUrls.js
+
+// parameter: list of companies --  **domains var is declared in sourceUrls.js**
 // parameter: current page url
 // returns the domainName of the current page
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
-// get the title element
+// gets the title element in order to inject the button
 let title = getTitle(currentDomain);
 
 // add btn next to the title of the page
