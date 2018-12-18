@@ -43,9 +43,12 @@ function messageReceiver(request, sender, sendResponse) {
 
 	// have to move to a helper file ***
 	function forFilter (sub) {
-
+		// console.log('sub: ', sub)
 	  // to fetch the values of each element of the array
+	  
+	  // debugger;
 	  let partial = sub.split(" ");
+
 	  const testPartial = partial.map( keyword => {
 
 			    // create the regex
@@ -65,7 +68,13 @@ function messageReceiver(request, sender, sendResponse) {
 	}
 
 	// PREPARE THE ORIGIN
-	const originSrc = sourceArr.filter(forFilter);
+	console.log("pre origin source", sourceArr);
+	let originSrc;
+	try {
+		originSrc = sourceArr.filter(forFilter);		
+	} catch (err) {
+		throw new Error({error: err, message: "fill the array"})
+	}
 	console.log(`origin shource: ${ originSrc }`);
 	const originMarkerplace = originSrc[0];
 
@@ -84,9 +93,28 @@ function messageReceiver(request, sender, sendResponse) {
 			}
 	}
 // -- current combobox values --
+// walmart
 // amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca, costco uk,  costco us (ok)
-// ebay ca, ebay uk (ok), ebay us (ok), ebay au, homedepot (ok), overstock ca, overstock, target, target au
+// ebay ca, ebay uk (ok), ebay us (ok), ebay au, homedepot (ok), overstock ca, overstock (ok), target, target au
 // vidaxl uk, vidaxl us, vidaxl au
+
+// requested domains
+/*
+		'ebay.com' (y), 'ebay.co.uk' (y), 'ebay.ca' (y), 'ebay.de' (none),
+		'amazon.com (y)', 'amazon.co.uk' (y), 'amazon.ca' (y), 'amazon.com.au' (y),
+		'walmart.com' , 'walmart.ca',
+		'homedepot.com', 'homedepot.ca',
+		'target.com', 'target.com.au',
+		'costco.com', 'costco.co.uk', 'costco.ca', 'costco.com.au',
+		'overstock.com', 'overstock.ca',
+		'vidaxl.com', 'vidaxl.co.uk', 'vidaxl.com.au', 'vidaxl.de',
+		'zooplus.com', 'zooplus.co.uk', 'zooplus.de',
+		'petplanet.co.uk',
+		'aosom.com', 'aosom.co.uk', 'aosom.ca', 'aosom.de',
+		'thinkgeek.com'
+
+*/
+
 
 
 // convert to us if there is com extension *combobox needs the value 'us'
@@ -119,7 +147,7 @@ function messageReceiver(request, sender, sendResponse) {
 		.then(() => {
 			let btn = document.getElementById('MainContent_ButtonSubmit')
 			btn.click()
-		}).catch( er => console.log(er))
+		}).catch( er => console.log("the error", er))
 
 
 
