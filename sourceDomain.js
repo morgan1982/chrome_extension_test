@@ -141,9 +141,14 @@ function injectButton(title) {
 
 
 
-// parameter: list of companies --  **domains var is declared in sourceUrls.js**
+// parameter: list of companies --
 // parameter: current page url
 // returns the domainName of the current page
+// let rawDomains = Domains();
+// rawDomains.format();
+// let domains = rawDomains.validUrls
+
+
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
 // gets the title element in order to inject the button
