@@ -84,8 +84,8 @@ function messageReceiver(request, sender, sendResponse) {
 			}
 	}
 // -- current combobox values --
-// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca, costco uk,  costco us
-// ebay ca, ebay uk, ebay us, ebay au, homedepot (ok), overstock ca, overstock, target, target au
+// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca, costco uk,  costco us (ok)
+// ebay ca, ebay uk (ok), ebay us (ok), ebay au, homedepot (ok), overstock ca, overstock, target, target au
 // vidaxl uk, vidaxl us, vidaxl au
 
 

@@ -1,5 +1,8 @@
 chrome.pageAction.onClicked.addListener(tabCreator);
 
+const raw_domains = new Domains()
+raw_domains.format()
+const validUrls = raw_domains.validUrls;
 
 
 // show page action on certain urls

@@ -29,7 +29,8 @@
 				"https://www.thinkgeek.com/*",
 				"https://www.vidaxl.com/*",
 				"https://www.vidaxl.co.uk/*",
-				"https://www.costco.com/*"
+				"https://www.costco.com/*",
+				"https://www.overstock.com/*"
 
 
 
@@ -55,7 +56,6 @@
 	"background": {
 		"scripts": ["sourceUrls.js", "background.js"]
 	},
-	"options_page": "options.html",
 	"page_action": {
 		"default_title": "some options",
 		"default_icon": {

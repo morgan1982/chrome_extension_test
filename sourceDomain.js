@@ -81,7 +81,7 @@ function getTitle(domainName) {
                 title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
                 break
             case "costco":
-                title = document.querySelector('.bazaar-voice');
+                title = document.querySelector('#details-bazaar-voice');
                 break
             case "zooplus":
                 title = document.querySelector('.product__description');
@@ -97,6 +97,9 @@ function getTitle(domainName) {
                 break
             case "vidaxl":
                 title = document.querySelector('.container-top');
+                break
+            case "overstock":
+                title = document.querySelector('.product-title');
                 break
 		}
 
@@ -144,10 +147,9 @@ function injectButton(title) {
 // parameter: list of companies --
 // parameter: current page url
 // returns the domainName of the current page
-// let rawDomains = Domains();
-// rawDomains.format();
-// let domains = rawDomains.validUrls
 
+let raw_domains = new Domains()
+let domains = raw_domains.domains
 
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
