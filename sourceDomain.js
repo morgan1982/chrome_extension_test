@@ -1,165 +1,194 @@
 console.log("inside source");
 
 
-// the url of the tab
-const currentUrl = window.location.href;
-
-// consider using generator function
-// fetch the names of the companies
-function companyNameExtractor(domains) {
-
-	const companies = [];
-	let company = null;
-	for (company of domains) {
-
-		let name = company.split('.')[0]
+window.addEventListener ("load", Run, false);
 
 
-		if (!companies.includes(name)) {
-			companies.push(name)
+
+
+function Run (e) {
+	
+	console.log("after loaded", e)
+
+
+	// the url of the tab
+	const currentUrl = window.location.href;
+
+	// consider using generator function
+	// fetch the names of the companies
+	function companyNameExtractor(domains) {
+
+		const companies = [];
+		let company = null;
+		for (company of domains) {
+
+			let name = company.split('.')[0]
+
+
+			if (!companies.includes(name)) {
+				companies.push(name)
+			}
+
+		}
+		return companies; // returns a array of companies
+	}
+
+	// extract the company_name from the current url
+	function currentDomainFinder( sourceDomains, url) {
+
+		let domain = null;
+
+		// have to dry the code 
+		// handle the different extensions for walmart
+		console.log(`url is: ${ url }`);
+		if ( url.includes("walmart") && url.includes("ca") ) {
+			domain = "walmart_ca";
+			return domain
+		}
+		if ( url.includes("walmart") && url.includes("com") ) {
+			domain = "walmart_com";
+			return domain
+		}
+		// handle target urls
+		if ( url.includes("target") && url.includes("com") && !url.includes("au") ) {
+			domain = "target_com";
+			return domain
+		}
+		if ( url.includes("target") && url.includes("au") ) {
+			domain = "target_au";
+			return domain
+		}
+		// select the correct domain
+		for ( domain of sourceDomains) {
+				let re = new RegExp(domain)
+
+				if (re.test(url)) {
+					break;
+				}
 		}
 
-	}
-	return companies; // returns a array of companies
-}
 
-// extract the company_name from the current url
-function currentDomainFinder( sourceDomains, url) {
-
-	let domain = null;
-	// handle the different extensions for walmart
-
-	console.log(`url is: ${ url }`);
-	if ( url.includes("walmart") && url.includes("ca") ) {
-		domain = "walmart_ca";
 		return domain
-	}
-	if ( url.includes("walmart") && url.includes("com") ) {
-		domain = "walmart_com";
-		return domain
+
 	}
 
-	// select the correct domain
-	for ( domain of sourceDomains) {
-			let re = new RegExp(domain)
+	// return the title element of the page
+	function getTitle(domainName) {
+			let title = null;
+			console.log(`the domainName for switch: ${ domainName }`)
 
-			if (re.test(url)) {
-				break;
+
+			switch (domainName) {
+
+	            // have to add the other suppliers
+				case "amazon":
+					title = document.querySelector('#titleSection');
+					break;
+				case "ebay":
+					title = document.querySelector('#itemTitle');
+					break
+	            case "homedepot":
+	                title = document.querySelector('.manufacturer-name__with_reviews');
+	                break
+	            case "walmart_com":
+	                title = document.querySelector('.prod-TitleSection');
+	                break
+	            case "walmart_ca":
+	                title = document.querySelector('#product-desc');
+	                break
+	            case "target_com":
+	                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
+	                break
+	            case "target_au":
+	                title = document.querySelector('.prod-basic');
+	                break
+	            case "costco":
+	                title = document.querySelector('#details-bazaar-voice');
+	                break
+	            case "zooplus":
+	                title = document.querySelector('.product__description');
+	                break
+	            case "aosom":
+	                title = document.querySelector('.product-name');
+	                break
+	            case "petplanet":
+	                title = document.querySelector('.container--product-name');
+	                break
+	            case "thinkgeek":
+	                title = document.querySelector('.header');
+	                break
+	            case "vidaxl":
+	                title = document.querySelector('.container-top');
+	                break
+	            case "overstock":
+	                title = document.querySelector('.product-title');
+	                break
 			}
+
+			if (title) {
+				    title.className += title.className ? ' product_title' : 'product_title';
+				}
+			console.log("prepared title", title)
+			return title;
+
 	}
 
 
-	return domain
-
-}
-
-// return the title element of the page
-function getTitle(domainName) {
-		let title = null;
-		console.log(`the domainName for switch: ${ domainName }`)
+	function injectButton(title) {
 
 
-		switch (domainName) {
+		let btnText = document.createTextNode("add");
 
-            // have to add the other suppliers
-			case "amazon":
-				title = document.querySelector('#titleSection');
-				break;
-			case "ebay":
-				title = document.querySelector('#itemTitle');
-				break
-            case "homedepot":
-                title = document.querySelector('.manufacturer-name__with_reviews');
-                break
-            case "walmart_com":
-                title = document.querySelector('.prod-TitleSection');
-                break
-            case "walmart_ca":
-                title = document.querySelector('#product-desc');
-                break
-            case "target":
-                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
-                break
-            case "costco":
-                title = document.querySelector('#details-bazaar-voice');
-                break
-            case "zooplus":
-                title = document.querySelector('.product__description');
-                break
-            case "aosom":
-                title = document.querySelector('.product-name');
-                break
-            case "petplanet":
-                title = document.querySelector('.container--product-name');
-                break
-            case "thinkgeek":
-                title = document.querySelector('.header');
-                break
-            case "vidaxl":
-                title = document.querySelector('.container-top');
-                break
-            case "overstock":
-                title = document.querySelector('.product-title');
-                break
-		}
+		let btn = document.createElement('div');
+			btn.setAttribute('class', 'dropshie_btn');
 
-		if (title) {
-			    title.className += title.className ? ' product_title' : 'product_title';
-			}
-		console.log("prepared title", title)
-		return title;
+		btn.appendChild(btnText);
+		console.log(`btn ${ btn }`);
 
-}
+	    let btnContainer = document.createElement('div')
+			btnContainer.setAttribute('class', 'dropshie_btn_container')
 
-
-function injectButton(title) {
-
-
-	let btnText = document.createTextNode("add");
-
-	let btn = document.createElement('div');
-		btn.setAttribute('class', 'dropshie_btn');
-
-	btn.appendChild(btnText);
-	console.log(`btn ${ btn }`);
-
-    let btnContainer = document.createElement('div')
-		btnContainer.setAttribute('class', 'dropshie_btn_container')
-
-    btnContainer.appendChild(btn);
-	console.log(`btnContainer ${ btnContainer }`);
+	    btnContainer.appendChild(btn);
+		console.log(`btnContainer ${ btnContainer }`);
 
 
 
-    // title.parentNode.insertBefore(btnContainer, title.nextSibling);
-	title.appendChild(btnContainer);
+	    // title.parentNode.insertBefore(btnContainer, title.nextSibling);
+		title.appendChild(btnContainer);
 
-	btn.addEventListener('click', () => {
+		btn.addEventListener('click', () => {
 
 
-	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
-	})
+		    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
+		})
+
+	}
+
+
+
+	// parameter: list of companies --
+	// parameter: current page url
+	// returns the domainName of the current page
+
+	let raw_domains = new Domains()
+	let domains = raw_domains.domains
+
+	const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
+
+	// gets the title element in order to inject the button
+	let title = getTitle(currentDomain);
+
+	// add btn next to the title of the page
+	if (title) {
+		injectButton(title);
+	}
+
+
+	// chrome.runtime.onMessage.addListener(messageReceiver);
+
+
 
 }
 
 
 
-// parameter: list of companies --
-// parameter: current page url
-// returns the domainName of the current page
-
-let raw_domains = new Domains()
-let domains = raw_domains.domains
-
-const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
-
-// gets the title element in order to inject the button
-let title = getTitle(currentDomain);
-
-// add btn next to the title of the page
-if (title) {
-	injectButton(title);
-}
-
-
-// chrome.runtime.onMessage.addListener(messageReceiver);

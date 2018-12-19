@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "testing_module",
 	"description": "testing filling the form from source",
-	"version": "0.01",
+	"version": "0.5",
 	"content_scripts": [
 		{
 			"matches": [
@@ -24,6 +24,7 @@
 				"https://www.walmart.ca/*",
 				"https://www.aosom.co.uk/*",
 				"https://intl.target.com/*",
+				"https://www.target.com.au/*",
 				"https://www.zooplus.com/*",
 				"https://www.petplanet.co.uk/*",
 				"https://www.thinkgeek.com/*",
@@ -31,11 +32,6 @@
 				"https://www.vidaxl.co.uk/*",
 				"https://www.costco.com/*",
 				"https://www.overstock.com/*"
-
-
-
-
-
 
 			],
 			"css": ["content.css"],

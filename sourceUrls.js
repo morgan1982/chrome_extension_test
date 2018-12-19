@@ -28,6 +28,9 @@ function Domains () {
 
 
 
+
+// with closure
+
 // let Domains = function() {
 // 		let _domains = [
 // 				'ebay.com', 'ebay.co.uk', 'ebay.ca', 'ebay.de',
