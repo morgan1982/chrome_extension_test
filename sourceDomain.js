@@ -7,7 +7,7 @@ window.addEventListener ("load", Run, false);
 
 
 function Run (e) {
-	
+
 	console.log("after loaded", e)
 
 
@@ -38,7 +38,7 @@ function Run (e) {
 
 		let domain = null;
 
-		// have to dry the code 
+		// have to dry the code
 		// handle the different extensions for walmart
 		console.log(`url is: ${ url }`);
 		if ( url.includes("walmart") && url.includes("ca") ) {
@@ -123,6 +123,15 @@ function Run (e) {
 	            case "overstock":
 	                title = document.querySelector('.product-title');
 	                break
+			}
+			function checkForElement(element) {
+
+				if (element){
+					return element
+				}else {
+					setTimeout( checkForElement, 100)
+				}
+
 			}
 
 			if (title) {
