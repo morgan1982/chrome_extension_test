@@ -13,13 +13,14 @@
 .dropshie_btn {
     display: flex;
     font-family: 'Montserrat', sans-serif;
-    font-size: .8rem;
+    font-size: 13px;
     color: white;
     background: #49b3b1;
     margin-left: .9rem;
     border-radius: .2rem;
-    padding: .5rem 1rem;
-    height: 2em;
+    padding:  8px 16px;
+    height: 20px;
+    width:  40px;
     align-items: center;
     justify-content: center;
     animation: appear .4s ease-out;

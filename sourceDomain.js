@@ -74,90 +74,114 @@ console.log("inside source");
 
 	// return the title element of the page
 	function getTitle(domainName) {
+
 			let title = null;
 			console.log(`the domainName for switch: ${ domainName }`)
 
+			let counter = 0;
+			let checker = setInterval(() => findElement(domainName), 500)
+
+			const findElement  = (domainName) => {
+
+			console.log(`--inside interval-- : domain: ${ domainName } - ${ counter }`);
 
 			switch (domainName) {
 
 	            // have to add the other suppliers
-				case "amazon":
-					title = document.querySelector('#titleSection');
-					break;
-				case "ebay":
-					title = document.querySelector('#itemTitle');
-					break
-	            case "homedepot":
-	                title = document.querySelector('.manufacturer-name__with_reviews');
-	                break
-	            case "walmart_com":
-	                title = document.querySelector('.prod-TitleSection');
-	                break
-	            case "walmart_ca":
-	                title = document.querySelector('#product-desc');
-	                break
-	            case "target_com":
-	                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
-	                break
-	            case "target_au":
-	                title = document.querySelector('.prod-basic');
-	                break
-	            case "costco":
-	                title = document.querySelector('#details-bazaar-voice');
-	                break
-	            case "zooplus":
-	                title = document.querySelector('.product__description');
-	                break
-	            case "aosom":
-	                title = document.querySelector('.product-name');
-	                break
-	            case "petplanet":
-	                title = document.querySelector('.container--product-name');
-	                break
-	            case "thinkgeek":
-	                title = document.querySelector('.header');
-	                break
-	            case "vidaxl":
-	                title = document.querySelector('.container-top');
-	                break
-	            case "overstock":
-	                title = document.querySelector('.product-title');
-	                break
-			}
+					case "amazon":
+						title = document.querySelector('#titleSection');
+						break;
+					case "ebay":
+						title = document.querySelector('#itemTitle');
+						break
+		            case "homedepot":
+		                title = document.querySelector('.manufacturer-name__with_reviews');
+		                break
+		            case "walmart_com":
+		                title = document.querySelector('.prod-TitleSection');
+		                break
+		            case "walmart_ca":
+		                title = document.querySelector('#product-desc');
+		                break
+		            case "target_com":
+		                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
+		                break
+		            case "target_au":
+		                title = document.querySelector('.prod-basic');
+		                break
+		            case "costco":
+		                title = document.querySelector('#details-bazaar-voice');
+		                break
+		            case "zooplus":
+		                title = document.querySelector('.product__description');
+		                break
+		            case "aosom":
+		                title = document.querySelector('.product-name');
+		                break
+		            case "petplanet":
+		                title = document.querySelector('.container--product-name');
+		                break
+		            case "thinkgeek":
+		                title = document.querySelector('.header');
+		                break
+		            case "vidaxl":
+		                title = document.querySelector('.container-top');
+		                break
+		            case "overstock":
+		                title = document.querySelector('.product-title');
+		                break
+				}
 
-			// after picking the title set the interval
-			// if it doesn't find the element throw an error
-			let checker  = setInterval(() => findElement(title), 500)
+				if (title) {
+				    title.className += title.className ? ' product_title' : 'product_title';
+					console.log("element found", title)
+					clearInterval(checker);
+					checker = 0;
 
-			let counter = 0
-			const findElement = element => {
-				console.log("--inside the interval---", title)
-				counter += 1
-				if ( element ) {
-					clearInterval(checker)
-					checker = 0
 				}
 				if (counter === 20 && domainName !== "target_au" ) {
 					clearInterval(checker)
 					throw new Error("cannot find element")
 				}
-				if (domainName === "target_au") {
-					// exit condition
-					if (element) {
-						return
-					}
 
-					window.addListener('onLoad', findElement, false)
-					// clearInterval(checker)
-					// console.log("continue to load the page scripts")
-				}
+				counter += 1
+
 			}
+			checker();
+			console.log('the value of the title after interval', title)
 
-			if (title) {
-				    title.className += title.className ? ' product_title' : 'product_title';
-				}
-			console.log("prepared title", title)
 			return title;
+			// // after picking the title set the interval
+			// let checker  = setInterval(() => checkElement(title), 100)
+
+			// let counter = 0
+			// const checkElement = element => {
+			// 	console.log("--inside the interval---", title)
+			// 	counter += 1
+			// 	if ( element ) {
+			// 		clearInterval(checker)
+			// 		checker = 0
+			// 	}
+
+			// 	// fill the rest of the sites that need full load
+			// 	if (domainName === "target_au") {
+					
+			// 		// exit condition
+			// 		if (element) {
+			// 			return
+			// 		}
+
+			// 		window.addEventListener('load', checkElement, false)
+			// 		// clearInterval(checker)
+			// 		// console.log("continue to load the page scripts")
+			// 	}
+			// }
+
+			// if (title) {
+			// 	    title.className += title.className ? ' product_title' : 'product_title';
+			// 	}
+			// console.log("prepared title", title)
+			// return title;
 
 	}
 
@@ -183,7 +207,6 @@ console.log("inside source");
 
 	    // title.parentNode.insertBefore(btnContainer, title.nextSibling);
 		title.appendChild(btnContainer);
-
 		btn.addEventListener('click', () => {
 
 
@@ -207,6 +230,7 @@ console.log("inside source");
 	let title = getTitle(currentDomain);
 
 	// add btn next to the title of the page
+	console.log("--the title returned from the interval", title);
 	if (title) {
 		injectButton(title);
 	}
