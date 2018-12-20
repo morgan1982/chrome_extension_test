@@ -1,14 +1,14 @@
 console.log("inside source");
 
 
-window.addEventListener ("load", Run, false);
+// window.addEventListener ("load", Run, false);
 
 
 
 
-function Run (e) {
-	
-	console.log("after loaded", e)
+// function Run (e) {
+
+	// console.log("after loaded", e)
 
 
 	// the url of the tab
@@ -38,7 +38,7 @@ function Run (e) {
 
 		let domain = null;
 
-		// have to dry the code 
+		// have to dry the code
 		// handle the different extensions for walmart
 		console.log(`url is: ${ url }`);
 		if ( url.includes("walmart") && url.includes("ca") ) {
@@ -125,6 +125,34 @@ function Run (e) {
 	                break
 			}
 
+			// after picking the title set the interval
+			// if it doesn't find the element throw an error
+			let checker  = setInterval(() => findElement(title), 500)
+
+			let counter = 0
+			const findElement = element => {
+				console.log("--inside the interval---", title)
+				counter += 1
+				if ( element ) {
+					clearInterval(checker)
+					checker = 0
+				}
+				if (counter === 20 && domainName !== "target_au" ) {
+					clearInterval(checker)
+					throw new Error("cannot find element")
+				}
+				if (domainName === "target_au") {
+					// exit condition
+					if (element) {
+						return
+					}
+
+					window.addListener('onLoad', findElement, false)
+					// clearInterval(checker)
+					// console.log("continue to load the page scripts")
+				}
+			}
+
 			if (title) {
 				    title.className += title.className ? ' product_title' : 'product_title';
 				}
@@ -188,7 +216,7 @@ function Run (e) {
 
 
 
-}
+// }
 
 
 
