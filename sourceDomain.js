@@ -69,7 +69,7 @@ function currentDomainFinder( sourceDomains, url) {
 }
 
 // return the title element of the page
-function getTitle(domainName) {
+function getTitle(domainName, callback) {
 		let title = null;
 		console.log(`the domainName for switch: ${ domainName }`)
 
@@ -86,7 +86,7 @@ function getTitle(domainName) {
 					title = document.querySelector('#titleSection');
 					break;
 				case "ebay":
-					title = document.querySelector('#itemTitlesssss');
+					title = document.querySelector('#itemTitle');
 					break
 	            case "homedepot":
 	                title = document.querySelector('.manufacturer-name__with_reviews');
@@ -95,7 +95,7 @@ function getTitle(domainName) {
 	                title = document.querySelector('.prod-TitleSection');
 	                break
 	            case "walmart_ca":
-	                title = document.querySelector('#product-desc_kotor');
+	                title = document.querySelector('#product-desc');
 	                break
 	            case "target_com":
 	                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
@@ -129,7 +129,6 @@ function getTitle(domainName) {
 			return title;
 		}
 
-		// let counter = 0;
 
 		const checkForElement = element => {
 
@@ -137,8 +136,8 @@ function getTitle(domainName) {
 				return new Promise ( (resolve, reject) => {
 
 				let counter = 0
-				// check for the element in the dom
 
+				// check for the element in the dom
 				const checker =  domainName => {
 
 		            title = setTitle(domainName);
@@ -146,37 +145,18 @@ function getTitle(domainName) {
 
 					if (title){
 						console.log("element found: ", title);
-						resolve(title)
+						return resolve(title)
 					}
 					if (counter >= 20) {
 
 						// stop conndition
-						reject("cannot find element")
-					}
-					if (domainName === "target_au") {
-
-						console.log('found the domain target.com.au')
-						// wait the dom to load
-						// debugger;
-						window.addEventListener('onload', Run, false)
-
-						function Run () {
-							console.log('---after loading---', element);
-							setTimeout(() => checker(domainName), 500)
-							if (element) {
-
-								console.log("target_au found: ", element)
-								resolve(element)
-
-							}
-						}
+						return reject("cannot find element")
 					}
 					else {
 						console.log("---recurse--")
 						// debugger;
 						setTimeout(() => checker(domainName), 500);
 					}
-
 				}
 				// init
 				checker(domainName);
@@ -189,17 +169,16 @@ function getTitle(domainName) {
 
 		checkForElement(title).then( el => {
 			console.log("after resolving the promise: ", el)
+
+		    el.className += el.className ? ' product_title' : 'product_title';
+
+			console.log("prepared title", el)
+			callback(el);
+
 		}).catch( err => {
 			throw new Error(err)
-		} )
+		})
 
-		console.log("the element after the finder", title);
-
-		if (title) {
-			    title.className += title.className ? ' product_title' : 'product_title';
-			}
-		console.log("prepared title", title)
-		return title;
 
 }
 
@@ -227,8 +206,6 @@ function injectButton(title) {
 	title.appendChild(btnContainer);
 
 	btn.addEventListener('click', () => {
-
-
 	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
 	})
 
@@ -246,13 +223,10 @@ let domains = raw_domains.domains
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
 // gets the title element in order to inject the button
-let title = getTitle(currentDomain);
-
-// add btn next to the title of the page
-if (title) {
+getTitle(currentDomain, title => {
+	console.log("--after the getTitle function--", title)
 	injectButton(title);
-}
-
+});
 
 // chrome.runtime.onMessage.addListener(messageReceiver);
 

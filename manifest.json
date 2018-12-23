@@ -34,6 +34,7 @@
 				"https://www.overstock.com/*"
 
 			],
+			"run_at": "document_end",
 			"css": ["content.css"],
 			"js": ["sourceUrls.js", "sourceDomain.js"]
 		}
