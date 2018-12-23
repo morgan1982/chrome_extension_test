@@ -74,104 +74,126 @@ function getTitle(domainName) {
 		console.log(`the domainName for switch: ${ domainName }`)
 
 
-		switch (domainName) {
+		const setTitle = domainName => {
 
-            // have to add the other suppliers
-			case "amazon":
-				title = document.querySelector('#titleSection');
-				break;
-			case "ebay":
-				title = document.querySelector('#itemTitle');
-				break
-            case "homedepot":
-                title = document.querySelector('.manufacturer-name__with_reviews');
-                break
-            case "walmart_com":
-                title = document.querySelector('.prod-TitleSection');
-                break
-            case "walmart_ca":
-                title = document.querySelector('#product-desc_kotor');
-                break
-            case "target_com":
-                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
-                break
-            case "target_au":
-                title = document.querySelector('.prod-basic');
-                break
-            case "costco":
-                title = document.querySelector('#details-bazaar-voice');
-                break
-            case "zooplus":
-                title = document.querySelector('.product__description');
-                break
-            case "aosom":
-                title = document.querySelector('.product-name');
-                break
-            case "petplanet":
-                title = document.querySelector('.container--product-name');
-                break
-            case "thinkgeek":
-                title = document.querySelector('.header');
-                break
-            case "vidaxl":
-                title = document.querySelector('.container-top');
-                break
-            case "overstock":
-                title = document.querySelector('.product-title');
-                break
+
+			// dry that with a map or something
+			// put donains and selectors to a dictionary
+			switch (domainName) {
+
+
+				case "amazon":
+					title = document.querySelector('#titleSection');
+					break;
+				case "ebay":
+					title = document.querySelector('#itemTitlesssss');
+					break
+	            case "homedepot":
+	                title = document.querySelector('.manufacturer-name__with_reviews');
+	                break
+	            case "walmart_com":
+	                title = document.querySelector('.prod-TitleSection');
+	                break
+	            case "walmart_ca":
+	                title = document.querySelector('#product-desc_kotor');
+	                break
+	            case "target_com":
+	                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
+	                break
+	            case "target_au":
+	                title = document.querySelector('.prod-basic');
+	                break
+	            case "costco":
+	                title = document.querySelector('#details-bazaar-voice');
+	                break
+	            case "zooplus":
+	                title = document.querySelector('.product__description');
+	                break
+	            case "aosom":
+	                title = document.querySelector('.product-name');
+	                break
+	            case "petplanet":
+	                title = document.querySelector('.container--product-name');
+	                break
+	            case "thinkgeek":
+	                title = document.querySelector('.header');
+	                break
+	            case "vidaxl":
+	                title = document.querySelector('.container-top');
+	                break
+	            case "overstock":
+	                title = document.querySelector('.product-title');
+	                break
+			}
+
+			return title;
 		}
 
-		let counter = 0;
-		let checker; 
-		const checkForElement = (element, checkInterval) => {
-			counter += 1
-			if (element){
-				testInterval(checker);
-				console.log(`element found: ${ element }`);
-				return element
-			}
-			if (counter >= 20) {
-				debugger;
-				
-				console.log(`before killing: ${ checker }`)
-				checkInterval(checker);
-				console.log(`after killing: ${ checker }`)
-				// clearInterval(checker);
-				checker = 0
-				throw new Error("cannot find element on the page")
-				return
-			}
-			if (domainName === "target_au") {
-				window.addEventListener('load', Run, false)
+		// let counter = 0;
 
-				function Run () {
-					console.log('the element of target_au', element);
-					if (element) {
+		const checkForElement = element => {
 
-						console.log("target_au found: ", element)
-						checkInterval(checker);
 
+				return new Promise ( (resolve, reject) => {
+
+				let counter = 0
+				// check for the element in the dom
+
+				const checker =  domainName => {
+
+		            title = setTitle(domainName);
+					counter += 1;
+
+					if (title){
+						console.log("element found: ", title);
+						resolve(title)
 					}
+					if (counter >= 20) {
+
+						// stop conndition
+						reject("cannot find element")
+					}
+					if (domainName === "target_au") {
+
+						console.log('found the domain target.com.au')
+						// wait the dom to load
+						// debugger;
+						window.addEventListener('onload', Run, false)
+
+						function Run () {
+							console.log('---after loading---', element);
+							setTimeout(() => checker(domainName), 500)
+							if (element) {
+
+								console.log("target_au found: ", element)
+								resolve(element)
+
+							}
+						}
+					}
+					else {
+						console.log("---recurse--")
+						// debugger;
+						setTimeout(() => checker(domainName), 500);
+					}
+
 				}
-			}
-			else {
-				console.log("---invoke the interval--")
-				checker = setInterval( () => checkForElement(element, checkInterval), 500)
-			}
-			
+				// init
+				checker(domainName);
+
+			})
+
 
 
 		}
 
-		// check if interval is triggered and kill it
-		const checkInterval = intervalValue => {
-			console.log('the value of the interval', intervalValue)
-			if (intervalValue) {
-				clearInterval(intervalValue)
-			}
-		}
+		checkForElement(title).then( el => {
+			console.log("after resolving the promise: ", el)
+		}).catch( err => {
+			throw new Error(err)
+		} )
 
-		checkForElement(title, checkInterval);
+		console.log("the element after the finder", title);
 
 		if (title) {
 			    title.className += title.className ? ' product_title' : 'product_title';
