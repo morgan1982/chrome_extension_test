@@ -41,6 +41,10 @@ function currentDomainFinder( sourceDomains, url) {
 		domain = "walmart_ca";
 		return domain
 	}
+	if ( url.includes("amazon") && url.includes("au") ) {
+		domain = "amazon_au";
+		return domain
+	}
 	if ( url.includes("walmart") && url.includes("com") ) {
 		domain = "walmart_com";
 		return domain
@@ -81,7 +85,9 @@ function getTitle(domainName, callback) {
 			// put donains and selectors to a dictionary
 			switch (domainName) {
 
-
+				case "amazon_au":
+					title = document.querySelector('#booksTitle');
+					break;
 				case "amazon":
 					title = document.querySelector('#titleSection');
 					break;

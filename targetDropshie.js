@@ -12,6 +12,7 @@ function messageReceiver(request, sender, sendResponse) {
 		// url of the source page
 		sourceUrl = request.url;
 		console.log(`test the url ${ sourceUrl }`);
+		debugger;
 	}
 
 
@@ -41,11 +42,15 @@ function messageReceiver(request, sender, sendResponse) {
 						"vidaxl uk"];
 
 
+
+
+
+
 	// have to move to a helper file ***
 	function forFilter (sub) {
 		// console.log('sub: ', sub)
 	  // to fetch the values of each element of the array
-	  
+
 	  // debugger;
 	  let partial = sub.split(" ");
 
@@ -71,11 +76,13 @@ function messageReceiver(request, sender, sendResponse) {
 	console.log("pre origin source", sourceArr);
 	let originSrc;
 	try {
-		originSrc = sourceArr.filter(forFilter);		
+		originSrc = sourceArr.filter(forFilter);
 	} catch (err) {
 		throw new Error({error: err, message: "fill the array"})
 	}
 	console.log(`origin shource: ${ originSrc }`);
+
+	// the value of the combobox
 	const originMarkerplace = originSrc[0];
 
 
@@ -119,7 +126,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 // convert to us if there is com extension *combobox needs the value 'us'
 	let origin;
-	if (originMarkerplace.includes('com')) {
+	if (originMarkerplace.includes('com') && !originMarkerplace.includes('amazon')) {
 		origin = convertToUs(originMarkerplace);
 	} else {
 		origin = originMarkerplace;
