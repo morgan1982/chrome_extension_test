@@ -148,7 +148,6 @@ function getTitle(domainName, callback) {
 						return resolve(title)
 					}
 					if (counter >= 20) {
-
 						// stop conndition
 						return reject("cannot find element")
 					}
@@ -216,8 +215,7 @@ function injectButton(title) {
 // parameter: list of companies --
 // parameter: current page url
 // returns the domainName of the current page
-
-let raw_domains = new Domains()
+let raw_domains = new Domains() // object from sourceUrls.js
 let domains = raw_domains.domains
 
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
