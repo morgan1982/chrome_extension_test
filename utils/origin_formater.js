@@ -4,7 +4,7 @@ let str2 = "https://www.amazon.com.au/gp/product/B07L2KNC3T?pf_rd_m=ANEGB3WVEVKZ
 
 // fetch from the dom or is not efficient?
 
-  const sourceArr = [ "amazon com",
+const sourceArr = [ "amazon com",
             "amazon uk",
             "amazon ca",
             "amazon au",
@@ -23,56 +23,41 @@ let str2 = "https://www.amazon.com.au/gp/product/B07L2KNC3T?pf_rd_m=ANEGB3WVEVKZ
             "vidaxl uk"];
 
 
+// here clean the diffenent cases with regex
+// handles urls like amazon.com.ca
+// removes the com in order to filter properly
+function removeExtensions (str) {
+  
+    if (str.includes('au')) {
+      return str.replace(/com|ca/g, '')    
+    } else {
+      return str
+    }
 
-
-const checker = el => {
-  // console.log(el)
-  let pieces = el.split(" ")
-  // console.log(pieces)
-  const checkIndex = pieces.map( ext => {
-    return str2.includes(ext) // return a boolean for each word
-  } )
-  // console.log(checkIndex)
-  // return pieces.every(el => el > 1)
-  if (checkIndex.every(el => el > 0)) {
-    return el
-  }
-
-  // for (let elem of pieces) {
-  //   console.log(elem)
-  //   return str.includes(elem)
-  // }
 }
 
-
-const product = sourceArr.filter(checker)
-console.log(product);
-
-// function forFilter (sub) {
-
-//   let partial = sub.split(" ");
-
-
-//   const testPartial = partial.map( keyword => {
-//     // console.log(keyword)
-
-//     // create the regex
-//     let flags = "i";
-
-//     re = new RegExp(keyword, flags);
-
-//     // matches the provided string for every keyword seperated by space
-//     return re.test(str);
-
-// 	  })
-
-//   if (testPartial.every( el => el >= 1 ) ) {
-//   	return sub;
-//   }
-
+// function replaceCom (arr) {
 
 // }
 
-// // origin
-// const origin = sourceArr.filter(forFilter);
-// console.log("originMarkerplace: ", origin[0]);
+
+const extract = url => el => {
+
+  console.log('---url inside filter---',url)
+  // console.log(el)
+  let pieces = el.split(" ")
+  // console.log('the split: ', pieces)
+  const checkIndex = pieces.map( ext => {
+      return url.includes(ext) // return a boolean for each word
+    })
+  // console.log(checkIndex)
+  return checkIndex.every(el => el > 0) 
+
+}
+
+
+const arrOfValues = sourceArr.filter(extract(removeExtensions(str2))) 
+let  comboVal = arrOfValues.join()
+console.log(comboVal);
+
+

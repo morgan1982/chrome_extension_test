@@ -12,7 +12,7 @@ function messageReceiver(request, sender, sendResponse) {
 		// url of the source page
 		sourceUrl = request.url;
 		console.log(`test the url ${ sourceUrl }`);
-		debugger;
+		// debugger;
 	}
 
 
@@ -41,18 +41,6 @@ function messageReceiver(request, sender, sendResponse) {
 						"amazon au",
 						"vidaxl uk"];
 
-
-
-    //
-   //  const findComboValue = (url, comboVals) => {
-
-   //  	const selection = comboVals.filter((el, i, ar) => {
-			// console.log("the element inside filter ", el)
-			// return (url.includes(el[0]) && url.includes(el[1]))
-   //  	})
-   //  	console.log("--inside the new filter", selection)
-   //  }
-   //  findComboValue(sourceUrl, sourceArr);
 
 
 	// have to move to a helper file ***
