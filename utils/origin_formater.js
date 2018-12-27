@@ -27,23 +27,22 @@ const sourceArr = [ "amazon com",
 // handles urls like amazon.com.ca
 // removes the com in order to filter properly
 function removeExtensions (str) {
-  
+    let slitedUrl = str.split('/');
+    let domain = slitedUrl[2]
+    console.log('the part: ', domain);
     if (str.includes('au')) {
-      return str.replace(/com|ca/g, '')    
+      return str.replace(/com|ca/g, '')
     } else {
       return str
     }
 
 }
 
-// function replaceCom (arr) {
-
-// }
 
 
 const extract = url => el => {
 
-  console.log('---url inside filter---',url)
+  // console.log('---url inside filter---',url)
   // console.log(el)
   let pieces = el.split(" ")
   // console.log('the split: ', pieces)
@@ -51,12 +50,12 @@ const extract = url => el => {
       return url.includes(ext) // return a boolean for each word
     })
   // console.log(checkIndex)
-  return checkIndex.every(el => el > 0) 
+  return checkIndex.every(el => el > 0) // checks if every element of the array is matched
 
 }
 
 
-const arrOfValues = sourceArr.filter(extract(removeExtensions(str2))) 
+const arrOfValues = sourceArr.filter(extract(removeExtensions(str2)))
 let  comboVal = arrOfValues.join()
 console.log(comboVal);
 

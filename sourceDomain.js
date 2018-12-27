@@ -37,6 +37,10 @@ function currentDomainFinder( sourceDomains, url) {
 	// have to dry the code
 	// handle the different extensions for walmart
 	console.log(`url is: ${ url }`);
+	if ( url.includes("costco") && url.includes("uk") ) {
+		domain = "costco_uk";
+		return domain
+	}
 	if ( url.includes("walmart") && url.includes("ca") ) {
 		domain = "walmart_ca";
 		return domain
@@ -108,6 +112,9 @@ function getTitle(domainName, callback) {
 	                break
 	            case "target_au":
 	                title = document.querySelector('.prod-basic');
+	                break
+	            case "costco_uk":
+	                title = document.querySelector('.header-content-container');
 	                break
 	            case "costco":
 	                title = document.querySelector('#details-bazaar-voice');

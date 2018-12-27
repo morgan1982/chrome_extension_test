@@ -29,7 +29,6 @@ function messageReceiver(request, sender, sendResponse) {
 						"costco com",
 						"costco uk",
 						"costco ca",
-						"ebay com",
 						"ebay uk",
 						"walmart",
 						"ebay com",
@@ -38,67 +37,58 @@ function messageReceiver(request, sender, sendResponse) {
 						"target",
 						"homedepot",
 						"overstock",
-						"amazon au",
 						"vidaxl uk"];
 
+	function removeExtensions (str) {
 
+		const slicedUrl = str.split('/');
+		let domain = slicedUrl[2]
 
-	// have to move to a helper file ***
-	function forFilter (sub) {
-		// console.log('sub: ', sub)
-	  // to fetch the values of each element of the array
-
-	  // debugger;
-	  let partial = sub.split(" ");
-
-	  const testPartial = partial.map( keyword => {
-
-			    // create the regex
-			    let flags = "i";
-			    let re = new RegExp(keyword, flags);
-			    // matches the provided string for every keyword on each element
-			    return re.test(sourceUrl);
-
-		  })
-
-	  // test if all values of the element are matched
-	  if (testPartial.every( el => el >= 1 ) ) {
-	  	return sub;
-	  }
-
+		if(domain.includes('uk')) {
+			return domain.replace(/au/g, '')
+		}
+	    if (domain.includes('au')) {
+	      return domain.replace(/com|ca/g, '')
+	    } else {
+	      return domain
+	    }
 
 	}
 
-	// PREPARE THE ORIGIN
-	console.log("pre origin source", sourceArr);
-	let originSrc;
-	try {
-		originSrc = sourceArr.filter(forFilter);
-	} catch (err) {
-		throw new Error({error: err, message: "fill the array"})
+	const convertToUs = (str) => {
+		if (str.includes('com')) {
+			return str.replace('com', 'us')
+		} else {
+			return str
+		}
 	}
-	console.log(`origin shource: ${ originSrc }`);
-
-	// the value of the combobox
-	const originMarkerplace = originSrc[0];
 
 
+	// extracts the array of the values for the originMarketPlace
+	const extract = url => el => {
 
-	function convertToUs(src) {
-		let ar = src.split(' ');
+	  // console.log('---url inside filter---',url)
+	  // console.log(el)
+	  let extensions = el.split(" ")
+	  // console.log('the split: ', extensions)
+	  const checkIndex = extensions.map( ext => {
+	      return url.includes(ext) // return a boolean for each word
+	    })
+	  // console.log(checkIndex)
+	  return checkIndex.every(el => el > 0) // checks if every element of the array is matched
 
-		if (ar[1] === 'com') {
-			ar[1] = 'us'
-			console.log('inside converter', ar)
-			let new_str = ar.join(' ')
-				return new_str
-			}else {
-				return ar.join(' ')
-			}
 	}
+
+
+	const arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
+	let  origin = arrOfValues.join() // the value for originMarketplace
+	const convertedOrigin = convertToUs(origin);
+	console.log("the value for the combobox: ", convertedOrigin);
+
+
 // -- current combobox values --
 // walmart
-// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca, costco uk,  costco us (ok)
+// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca (ok), costco uk,  costco us (ok)
 // ebay ca, ebay uk (ok), ebay us (ok), ebay au, homedepot (ok), overstock ca, overstock (ok), target, target au
 // vidaxl uk, vidaxl us, vidaxl au
 
@@ -120,15 +110,6 @@ function messageReceiver(request, sender, sendResponse) {
 */
 
 
-
-// convert to us if there is com extension *combobox needs the value 'us'
-	let origin;
-	if (originMarkerplace.includes('com') && !originMarkerplace.includes('amazon')) {
-		origin = convertToUs(originMarkerplace);
-	} else {
-		origin = originMarkerplace;
-	}
-
 	function formInputHandler(source, origin) {
 
 		return new Promise((resolve, reject) => {
@@ -137,7 +118,6 @@ function messageReceiver(request, sender, sendResponse) {
 			productUrl.value += source;
 			let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
 			originMarket.value = origin;
-
 			if ( productUrl.value === source && originMarket.value === origin ) {
 
 				resolve();
@@ -146,12 +126,12 @@ function messageReceiver(request, sender, sendResponse) {
 		})
 
 	}
-
-	formInputHandler(sourceUrl, origin)
+	// fill the originMarket
+	formInputHandler(sourceUrl, convertedOrigin)
 		.then(() => {
 			let btn = document.getElementById('MainContent_ButtonSubmit')
 			btn.click()
-		}).catch( er => console.log("the error", er))
+		}).catch( er => console.log("Error", er))
 
 
 
