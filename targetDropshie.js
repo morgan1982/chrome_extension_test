@@ -75,7 +75,7 @@ function messageReceiver(request, sender, sendResponse) {
 	      return url.includes(ext) // return a boolean for each word
 	    })
 	  // console.log(checkIndex)
-	  return checkIndex.every(el => el > 0) // checks if every element of the array is matched
+	  return checkIndex.every(el => el > 0) // checks if all extensions for every element of sourceArr are  mached
 
 	}
 
