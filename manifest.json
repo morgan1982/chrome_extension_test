@@ -17,7 +17,9 @@
 				"https://www.amazon.com.au/*",
 				"https://www.amazon.ca/*",
 				"https://www.ebay.co.uk/*",
+				"https://www.ebay.com.au/*",
 				"https://www.ebay.com/*",
+				"https://www.ebay.ca/*",
 				"https://www.homedepot.com/*",
 				"https://www.homedepot.ca/*",
 				"https://www.walmart.com/*",
@@ -29,14 +31,17 @@
 				"https://www.petplanet.co.uk/*",
 				"https://www.thinkgeek.com/*",
 				"https://www.vidaxl.com/*",
+				"https://www.vidaxl.com.au/*",
 				"https://www.vidaxl.co.uk/*",
 				"https://www.costco.com/*",
 				"https://www.costco.ca/*",
 				"https://www.costco.co.uk/*",
-				"https://www.overstock.com/*"
+				"https://www.overstock.com/*",
+				"https://www.overstock.ca/*"
+
 
 			],
-			"run_at": "document_end",
+
 			"css": ["content.css"],
 			"js": ["sourceUrls.js", "sourceDomain.js"]
 		}

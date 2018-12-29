@@ -35,8 +35,11 @@ function messageReceiver(request, sender, sendResponse) {
 						"ebay ca",
 						"ebay au",
 						"target",
+						"target au",
 						"homedepot",
 						"overstock",
+						"overstock ca",
+						"vidaxl au",
 						"vidaxl uk"];
 
 	function removeExtensions (str) {
@@ -63,7 +66,7 @@ function messageReceiver(request, sender, sendResponse) {
 		}
 	}
 
-
+// 			"run_at": "document_end",
 	// extracts the array of the values for the originMarketPlace
 	const extract = url => el => {
 
@@ -80,27 +83,35 @@ function messageReceiver(request, sender, sendResponse) {
 	}
 
 
-	const arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
-	let  origin = arrOfValues.join() // the value for originMarketplace
+	let arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
+
+	let origin;
+	// handle the overstock and target issue
+	if (arrOfValues[0] === "overstock" || arrOfValues[0] === "target" ) {
+		origin = arrOfValues[1]
+	} else {
+		origin = arrOfValues.join() // the value for originMarketplace
+	}
+	console.log("origin after the filter: ", origin)
 	const convertedOrigin = convertToUs(origin);
 	console.log("the value for the combobox: ", convertedOrigin);
 
 
 // -- current combobox values --
-// walmart
-// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (err), costco ca (ok), costco uk,  costco us (ok)
-// ebay ca, ebay uk (ok), ebay us (ok), ebay au, homedepot (ok), overstock ca, overstock (ok), target, target au
-// vidaxl uk, vidaxl us, vidaxl au
+// walmart (ok)
+// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (ok), costco ca (ok), costco uk (ok),  costco us (ok)
+// ebay ca (ok), ebay uk (ok), ebay us (ok), ebay au (ok), homedepot (ok), overstock ca (ok), overstock (ok), target (ok), target au (ok)
+// vidaxl uk (ok), vidaxl us (cannot access the domain), vidaxl au (ok)
 
-// requested domains
+// requested domains check if the button is injected
 /*
 		'ebay.com' (y), 'ebay.co.uk' (y), 'ebay.ca' (y), 'ebay.de' (none),
 		'amazon.com (y)', 'amazon.co.uk' (y), 'amazon.ca' (y), 'amazon.com.au' (y),
-		'walmart.com' , 'walmart.ca',
-		'homedepot.com', 'homedepot.ca',
-		'target.com', 'target.com.au',
-		'costco.com', 'costco.co.uk', 'costco.ca', 'costco.com.au',
-		'overstock.com', 'overstock.ca',
+		'walmart.com (y)' , 'walmart.ca (y)',
+		'homedepot.com (y)', 'homedepot.ca (y)',
+		'target.com (y)', 'target.com.au (y)',
+		'costco.com (y)', 'costco.co.uk (y)', 'costco.ca (y)', 'costco.com.au (not an e shop)',
+		'overstock.com (y)', 'overstock.ca (y)',
 		'vidaxl.com', 'vidaxl.co.uk', 'vidaxl.com.au', 'vidaxl.de',
 		'zooplus.com', 'zooplus.co.uk', 'zooplus.de',
 		'petplanet.co.uk',

@@ -99,7 +99,7 @@ function getTitle(domainName, callback) {
 					title = document.querySelector('#itemTitle');
 					break
 	            case "homedepot":
-	                title = document.querySelector('.manufacturer-name__with_reviews');
+	                title = document.querySelector('.badge-list');
 	                break
 	            case "walmart_com":
 	                title = document.querySelector('.prod-TitleSection');
@@ -114,7 +114,9 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.prod-basic');
 	                break
 	            case "costco_uk":
-	                title = document.querySelector('.header-content-container');
+	                // title = document.querySelector('.product-title-container div[data-bv-show=\'rating_summary\']')
+	                // title = document.querySelector('.bv_main_container')
+	                title = document.querySelector('.product-page-container .hidden-xs')
 	                break
 	            case "costco":
 	                title = document.querySelector('#details-bazaar-voice');
