@@ -112,10 +112,10 @@ function messageReceiver(request, sender, sendResponse) {
 		'target.com (y)', 'target.com.au (y)',
 		'costco.com (y)', 'costco.co.uk (y)', 'costco.ca (y)', 'costco.com.au (not an e shop)',
 		'overstock.com (y)', 'overstock.ca (y)',
-		'vidaxl.com', 'vidaxl.co.uk', 'vidaxl.com.au', 'vidaxl.de',
+		'vidaxl.com', 'vidaxl.co.uk (y)', 'vidaxl.com.au (y)', 'vidaxl.de',
 		'zooplus.com', 'zooplus.co.uk', 'zooplus.de',
 		'petplanet.co.uk',
-		'aosom.com', 'aosom.co.uk', 'aosom.ca', 'aosom.de',
+		'aosom.com', 'aosom.co.uk (y)', 'aosom.ca', 'aosom.de',
 		'thinkgeek.com'
 
 */
