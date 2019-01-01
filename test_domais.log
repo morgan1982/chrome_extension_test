@@ -1,0 +1,43 @@
+ebay.com -- button √  --- fills the form  √ -- submits the form (stack on loading)
+
+error -- Exception. Object reference not set to an instance of an object.
+
+ebay.co.uk -- button √  --- fills the form √ -- submits the form √
+ebay.com.au -- button √  --- fills the form √ -- submits the form √
+ebay.ca -- button   --- fills the form  -- submits the form
+
+
+amazon.com -- button   --- fills the form  -- submits the form
+amazon.co.uk -- button   --- fills the form  -- submits the form
+amazon.au -- button   --- fills the form  -- submits the form
+amazon.ca -- button   --- fills the form  -- submits the form
+
+
+costco.com -- button   --- fills the form  -- submits the form
+costco.co.uk -- button   --- fills the form  -- submits the form
+costco.ca -- button   --- fills the form  -- submits the form
+
+
+target.com -- button   --- fills the form  -- submits the form
+target.au -- button   --- fills the form  -- submits the form
+
+walmart.com -- button   --- fills the form  -- submits the form
+
+overstock.com -- button   --- fills the form  -- submits the form
+overstock.ca -- button   --- fills the form  -- submits the form
+
+vidaxl.com -- button   --- fills the form  -- submits the form
+vidaxl.co.uk -- button   --- fills the form  -- submits the form
+vidaxl.au -- button   --- fills the form  -- submits the form
+
+hemedepot.com -- button   --- fills the form  -- submits the form
+
+
+
+
+
+
+
+
+
+

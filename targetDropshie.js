@@ -78,7 +78,7 @@ function messageReceiver(request, sender, sendResponse) {
 	      return url.includes(ext) // return a boolean for each word
 	    })
 	  // console.log(checkIndex)
-	  return checkIndex.every(el => el > 0) // checks if all extensions for every element of sourceArr are  mached
+	  return checkIndex.every(el => el > 0) // checks if all extensions for every element of sourceArr are  matched
 
 	}
 
@@ -129,6 +129,9 @@ function messageReceiver(request, sender, sendResponse) {
 			productUrl.value += source;
 			let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")
 			originMarket.value = origin;
+			if (!originMarket.value) {
+				reject("cannot fill the originMarketPlace with: ", origin)
+			}
 			if ( productUrl.value === source && originMarket.value === origin ) {
 
 				resolve();

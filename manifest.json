@@ -3,6 +3,9 @@
 	"name": "testing_module",
 	"description": "testing filling the form from source",
 	"version": "0.5",
+	"web_accessible_resources": [
+		"images/*"
+	],
 	"content_scripts": [
 		{
 			"matches": [

@@ -200,24 +200,24 @@ function getTitle(domainName, callback) {
 function injectButton(title) {
 
 
-	let btnText = document.createTextNode("add");
+	// let btnText = document.createTextNode("add");
 
-	let btn = document.createElement('div');
-		btn.setAttribute('class', 'dropshie_btn');
+	let btn = document.createElement('span');
+		btn.setAttribute('class', 'capt');
 
-	btn.appendChild(btnText);
-	console.log(`btn ${ btn }`);
+	// btn.appendChild(btnText);
+	// console.log(`btn ${ btn }`);
 
-    let btnContainer = document.createElement('div')
-		btnContainer.setAttribute('class', 'dropshie_btn_container')
+    // let btnContainer = document.createElement('div')
+		// btnContainer.setAttribute('class', 'dropshie_btn_container')
 
-    btnContainer.appendChild(btn);
-	console.log(`btnContainer ${ btnContainer }`);
+    // btnContainer.appendChild(btn);
+	// console.log(`btnContainer ${ btnContainer }`);
 
 
 
     // title.parentNode.insertBefore(btnContainer, title.nextSibling);
-	title.appendChild(btnContainer);
+	title.appendChild(btn);
 
 	btn.addEventListener('click', () => {
 	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
