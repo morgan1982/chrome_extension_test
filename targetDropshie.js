@@ -91,7 +91,7 @@ function messageReceiver(request, sender, sendResponse) {
 	let origin;
 	console.log("--array after the filter: --", arrOfValues);
 	// handle the overstock and target issue
-	if (arrOfValues[0] === "overstock" || arrOfValues[1] === "target au" ) {
+	if (arrOfValues[1] === "overstock ca" || arrOfValues[1] === "target au" ) {
 		origin = arrOfValues[1]
 		// debugger;
 	} else {
