@@ -117,7 +117,8 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.product-page-container .hidden-xs h1')
 	                break
 				case "costco":
-					title = document.querySelector('h1[itemprop=\'name\']');
+					title = document.querySelector('.product-h1-container')
+					// title = document.querySelector('h1[itemprop=\'name\']');
 	                // title = document.querySelector('.product-h1-container h1[itemprop=\'name\']');
 	                break
 	            case "zooplus":
@@ -137,7 +138,9 @@ function getTitle(domainName, callback) {
 	                break
 	            case "overstock":
 	                title = document.querySelector('.product-title');
-	                break
+					break
+				default:
+					title = "you failed"
 			}
 
 			return title;
@@ -199,22 +202,19 @@ function injectButton(title) {
 
 	console.log("--inside inject button--", title);
 	// let btnText = document.createTextNode("add");
+	// let text = title.firstChild;
+	// let textSpan = document.createElement('span');
+	// textSpan.appendChild(text);
+	// textSpan.setAttribute('class', 'toLeft')
+	// console.log("text inside title: ", textSpan);
 
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'capt');
 
-	// btn.appendChild(btnText);
-	// console.log(`btn ${ btn }`);
-
-    // let btnContainer = document.createElement('div')
-		// btnContainer.setAttribute('class', 'dropshie_btn_container')
-
-    // btnContainer.appendChild(btn);
-	// console.log(`btnContainer ${ btnContainer }`);
 
 
-
-    // title.parentNode.insertBefore(btn, title.nextSibling);
+	// title.parentNode.insertBefore(btn, title.nextSibling);
+	// title.appendChild(textSpan);
 	title.appendChild(btn);
 
 

@@ -44,7 +44,6 @@
 
 
 			],
-
 			"css": ["content.css"],
 			"js": ["sourceUrls.js", "sourceDomain.js"]
 		}
