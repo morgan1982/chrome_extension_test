@@ -44,8 +44,11 @@ function messageReceiver(request, sender, sendResponse) {
 
 	function removeExtensions (str) {
 
+
 		const slicedUrl = str.split('/');
 		let domain = slicedUrl[2]
+
+		console.log("--the splitted domain--", domain)
 
 		if(domain.includes('uk')) {
 			return domain.replace(/au/g, '')
@@ -70,7 +73,7 @@ function messageReceiver(request, sender, sendResponse) {
 	// extracts the array of the values for the originMarketPlace
 	const extract = url => el => {
 
-	  // console.log('---url inside filter---',url)
+	  console.log('---url inside filter---',url)
 	  // console.log(el)
 	  let extensions = el.split(" ")
 	  // console.log('the split: ', extensions)
@@ -86,15 +89,17 @@ function messageReceiver(request, sender, sendResponse) {
 	let arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
 
 	let origin;
+	console.log("--array after the filter: --", arrOfValues);
 	// handle the overstock and target issue
-	if (arrOfValues[0] === "overstock" || arrOfValues[0] === "target" ) {
+	if (arrOfValues[0] === "overstock" || arrOfValues[1] === "target au" ) {
 		origin = arrOfValues[1]
+		// debugger;
 	} else {
 		origin = arrOfValues.join() // the value for originMarketplace
 	}
 	console.log("origin after the filter: ", origin)
 	const convertedOrigin = convertToUs(origin);
-	console.log("the value for the combobox: ", convertedOrigin);
+	// console.log("the value for the combobox: ", convertedOrigin);
 
 
 // -- current combobox values --

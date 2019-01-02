@@ -34,6 +34,10 @@ function currentDomainFinder( sourceDomains, url) {
 
 	let domain = null;
 
+	// extract the domain from the url
+	url = url.split('/')[2];
+	console.log('splited url', url);
+
 	// have to dry the code
 	// handle the different extensions for walmart
 	console.log(`url is: ${ url }`);
@@ -43,10 +47,6 @@ function currentDomainFinder( sourceDomains, url) {
 	}
 	if ( url.includes("walmart") && url.includes("ca") ) {
 		domain = "walmart_ca";
-		return domain
-	}
-	if ( url.includes("amazon") && url.includes("au") ) {
-		domain = "amazon_au";
 		return domain
 	}
 	if ( url.includes("walmart") && url.includes("com") ) {
@@ -89,11 +89,9 @@ function getTitle(domainName, callback) {
 			// put donains and selectors to a dictionary
 			switch (domainName) {
 
-				case "amazon_au":
-					title = document.querySelector('#booksTitle');
-					break;
+
 				case "amazon":
-					title = document.querySelector('#titleSection');
+					title = document.querySelector('#title');
 					break;
 				case "ebay":
 					title = document.querySelector('#itemTitle');
@@ -108,18 +106,19 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('#product-desc');
 	                break
 	            case "target_com":
-	                title = document.querySelector('.styles__ProductDetailsTitleRelatedLinks-sc-12eg98-0');
+	                title = document.querySelector('.styles__DescriptionContainerDiv-vttgqz-3 h1');
 	                break
 	            case "target_au":
-	                title = document.querySelector('.prod-basic');
+	                title = document.querySelector('.prod-basic h1');
 	                break
 	            case "costco_uk":
 	                // title = document.querySelector('.product-title-container div[data-bv-show=\'rating_summary\']')
 	                // title = document.querySelector('.bv_main_container')
-	                title = document.querySelector('.product-page-container .hidden-xs')
+	                title = document.querySelector('.product-page-container .hidden-xs h1')
 	                break
-	            case "costco":
-	                title = document.querySelector('#details-bazaar-voice');
+				case "costco":
+					title = document.querySelector('h1[itemprop=\'name\']');
+	                // title = document.querySelector('.product-h1-container h1[itemprop=\'name\']');
 	                break
 	            case "zooplus":
 	                title = document.querySelector('.product__description');
@@ -182,11 +181,10 @@ function getTitle(domainName, callback) {
 		}
 
 		checkForElement(title).then( el => {
-			console.log("after resolving the promise: ", el)
 
 		    el.className += el.className ? ' product_title' : 'product_title';
 
-			console.log("prepared title", el)
+			console.log("prepared title with button", el)
 			callback(el);
 
 		}).catch( err => {
@@ -199,7 +197,7 @@ function getTitle(domainName, callback) {
 
 function injectButton(title) {
 
-
+	console.log("--inside inject button--", title);
 	// let btnText = document.createTextNode("add");
 
 	let btn = document.createElement('span');
@@ -216,8 +214,9 @@ function injectButton(title) {
 
 
 
-    // title.parentNode.insertBefore(btnContainer, title.nextSibling);
+    // title.parentNode.insertBefore(btn, title.nextSibling);
 	title.appendChild(btn);
+
 
 	btn.addEventListener('click', () => {
 	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
