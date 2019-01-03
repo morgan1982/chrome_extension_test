@@ -135,7 +135,7 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.header');
 	                break
 	            case "vidaxl":
-	                title = document.querySelector('.container-top');
+	                title = document.querySelector('.container-top>.title');
 	                break
 	            case "overstock":
 	                title = document.querySelector('.product-title>h1');
@@ -186,7 +186,13 @@ function getTitle(domainName, callback) {
 
 		checkForElement(title).then( el => {
 
+			console.log("--domain after resolved promise", currentDomain);
+
 		    el.className += el.className ? ' product_title' : 'product_title';
+
+		    if ( currentDomain === "vidaxl") { // convert to flex for vidaxl
+		    	el.className += ' vidaTitle'
+		    }
 
 			console.log("prepared title with button", el)
 			callback(el);
@@ -202,15 +208,13 @@ function getTitle(domainName, callback) {
 function injectButton(title) {
 
 	console.log("--inside inject button--", title);
-	// let btnText = document.createTextNode("add");
-	// let text = title.firstChild;
-	// let textSpan = document.createElement('span');
-	// textSpan.appendChild(text);
-	// textSpan.setAttribute('class', 'toLeft')
-	// console.log("text inside title: ", textSpan);
 
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'capt');
+
+	if ( currentDomain === "vidaxl") {
+		btn.className += " vidaBtn"
+	}
 
 
 

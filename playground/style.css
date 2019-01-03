@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-* {
+/** {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}*/
+
+.product_title {
+    display: flex;
+    margin-bottom: 10px;
 }
 
-.capt {
-    display: inline-block;
+/*.capt {
     position: relative;
     margin-left: 10px;
     top: 5px;
@@ -18,9 +22,17 @@
     width: 40px;
     animation: appear .4s ease-out;
     cursor: pointer;
-    /*filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .3));*/
-    /*filter: drop-shadow(2px 3px 6px #444);*/
-}
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .3));
+    filter: drop-shadow(2px 3px 6px #444);
+}*/
+
+/*.capt {
+    background-image: url(../assets/inventory_button.png);
+    animation: appear .4s ease-out;
+    cursor: pointer;
+    filter: drop-shadow(2px 3px 6px #444);
+
+}*/
 
 .capt:hover {
     filter: drop-shadow(1px 2px 3px #555);
@@ -33,36 +45,6 @@
 body {
     font-family: "Montserrat", sans-serif;
     color: #312f2f;
-}
-
-.product_title {
-    /*display: flex;*/
-}
-.btn_container {
-    display: inline-block;
-
-}
-
-.dropshie_btn {
-    /*display: inline-block;*/
-    /*float: right;*/
-    display: flex;
-    margin-left: .9rem;
-    border-radius: .4rem;
-    padding: .5rem;
-    height: 3em;
-    /*width: 2.3rem;*/
-    align-items: center;
-    justify-content: center;
-    font-size: .8rem;
-    background: #49b3b1;
-    /*border: 1px solid #777;*/
-    color: white;
-    animation: appear .4s ease-out;
-    cursor: pointer;
-}
-.dropshie_btn:hover {
-    box-shadow: 0 1px 8px rgba(0, 0, 0,.2);
 }
 
 @keyframes appear {

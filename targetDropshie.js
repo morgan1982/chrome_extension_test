@@ -39,6 +39,7 @@ function messageReceiver(request, sender, sendResponse) {
 						"homedepot",
 						"overstock",
 						"overstock ca",
+						"vidaxl com",
 						"vidaxl au",
 						"vidaxl uk"];
 
