@@ -1,6 +1,6 @@
-chrome.pageAction.onClicked.addListener(tabCreator);
+// chrome.pageAction.onClicked.addListener(tabCreator);
 
-const raw_domains = new Domains()
+const raw_domains = new Domains() // from the sourceUrls
 raw_domains.format()
 const validUrls = raw_domains.validUrls;
 
@@ -8,7 +8,16 @@ const validUrls = raw_domains.validUrls;
 // show page action on certain urls
 function checkUrl(tabId, changeInfo, tab) {
 
-	// validUrls are injected from sourceUrls.js
+	// 	"page_action": {
+	// 	"default_title": "some options",
+	// 	"default_icon": {
+	// 		"16": "/assets/icon16.png",
+	// 		"48": "/assets/icon48.png",
+	// 		"128": "/assets/icon128.png"
+	// 	}
+	// }
+
+
 	validUrls.map( url => {
 
 		let regex = new RegExp(url + "/*");
@@ -20,7 +29,7 @@ function checkUrl(tabId, changeInfo, tab) {
 
 }
 
-chrome.tabs.onUpdated.addListener(checkUrl);
+// chrome.tabs.onUpdated.addListener(checkUrl);
 
 
 
