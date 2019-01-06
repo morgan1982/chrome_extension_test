@@ -1,37 +1,7 @@
-// chrome.pageAction.onClicked.addListener(tabCreator);
 
 const raw_domains = new Domains() // from the sourceUrls
 raw_domains.format()
 const validUrls = raw_domains.validUrls;
-
-
-// show page action on certain urls
-function checkUrl(tabId, changeInfo, tab) {
-
-	// 	"page_action": {
-	// 	"default_title": "some options",
-	// 	"default_icon": {
-	// 		"16": "/assets/icon16.png",
-	// 		"48": "/assets/icon48.png",
-	// 		"128": "/assets/icon128.png"
-	// 	}
-	// }
-
-
-	validUrls.map( url => {
-
-		let regex = new RegExp(url + "/*");
-
-		if (regex.test(tab.url)) {
-			chrome.pageAction.show(tabId)
-			}
-	})
-
-}
-
-// chrome.tabs.onUpdated.addListener(checkUrl);
-
-
 
 
 function tabCreator (request, sender, sendResponse) {
