@@ -32,8 +32,6 @@ function tabCreator (request, sender, sendResponse) {
 }
 
 
-
-
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 
 	let { url, target } = req;

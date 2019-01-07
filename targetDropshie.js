@@ -71,7 +71,7 @@ function messageReceiver(request, sender, sendResponse) {
 	}
 
 // 			"run_at": "document_end",
-	// extracts the array of the values for the originMarketPlace
+	// extracts an array of the values for the originMarketPlace
 	const extract = url => el => {
 
 	  console.log('---url inside filter---',url)
@@ -86,7 +86,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 	}
 
-
+	// extracts the current domain name from the url
 	let arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
 
 	let origin;
@@ -146,7 +146,7 @@ function messageReceiver(request, sender, sendResponse) {
 		})
 
 	}
-	// fill the originMarket
+	// fills the originMarket
 	formInputHandler(sourceUrl, convertedOrigin)
 		.then(() => {
 			let btn = document.getElementById('MainContent_ButtonSubmit')
