@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-
 .product_title {
-    /* position: relative; */
     display: flex !important;
     flex-basis: row;
     flex-wrap: nowrap;
@@ -10,13 +7,9 @@
 
 .dropshie_btn {
     flex-shrink: 0;
-    /* flex-basis: 0; */
     align-self: flex-start;
-    /* position: relative; */
     margin-left: 10px;
     display: inline-block;
-    /* top: 3px; */
-    /* right: 0; */
     background-image:url('chrome-extension://__MSG_@@extension_id__/images/inventory_button.png');
     background-position: center;
     background-size: cover;
@@ -33,10 +26,6 @@
 .dropshie_btn:active {
     filter: none;
 }
-
-
-
-
 
 @keyframes fromAbove {
     0% {

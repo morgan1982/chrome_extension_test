@@ -1,16 +1,8 @@
 console.log("inside source");
 
-
-// window.addEventListener ("load", Run, false);
-
-
-
-
-
 // the url of the tab
 const currentUrl = window.location.href;
 
-// consider using generator function
 // fetch the names of the companies
 function companyNameExtractor(domains) {
 
@@ -112,15 +104,10 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.prod-basic h1');
 	                break
 	            case "costco_uk":
-	                // title = document.querySelector('.product-title-container div[data-bv-show=\'rating_summary\']')
-	                // title = document.querySelector('.bv_main_container')
 	                title = document.querySelector('.product-page-container .hidden-xs h1')
 	                break
 				case "costco":
-					// title = document.querySelector('.product-h1-container');
 					title = document.querySelector('#product-details .product-h1-container>h1');
-					// title = document.querySelector('h1[itemprop=\'name\']');
-	                // title = document.querySelector('.product-h1-container h1[itemprop=\'name\']');
 	                break
 	            case "zooplus":
 	                title = document.querySelector('.product__description');
@@ -196,7 +183,7 @@ function getTitle(domainName, callback) {
 			callback(el);
 
 		}).catch( err => {
-			chrome.runtime.sendMessage({ message: "cannot find element" });
+			// chrome.runtime.sendMessage({ message: "cannot find element" });
 			throw new Error(err)
 		})
 
