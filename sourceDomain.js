@@ -94,7 +94,7 @@ function getTitle(domainName, callback) {
 					title = document.querySelector('#title');
 					break;
 				case "ebay":
-					title = document.querySelector('#itemTitlekll');
+					title = document.querySelector('#itemTitle');
 					break
 	            case "homedepot":
 	                title = document.querySelector('.product-title__title');
