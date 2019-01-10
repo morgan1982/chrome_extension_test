@@ -1,23 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 .product_title {
-     /*display: flex;*/
-     /*justify-content: space-around;*/
+    /* position: relative; */
+    display: flex !important;
+    flex-basis: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 }
 
-.vidaTitle {
-    display: flex;
-}
-
-.vidaBtn {
+.dropshie_btn {
     flex-shrink: 0;
-}
-
-.capt {
-    position: relative;
+    /* flex-basis: 0; */
+    align-self: flex-start;
+    /* position: relative; */
     margin-left: 10px;
     display: inline-block;
-    top: 3px;
+    /* top: 3px; */
+    /* right: 0; */
     background-image:url('chrome-extension://__MSG_@@extension_id__/images/inventory_button.png');
     background-position: center;
     background-size: cover;
@@ -27,11 +26,11 @@
     cursor: pointer;
 }
 
-.capt:hover {
+.dropshie_btn:hover {
     filter: drop-shadow(1px 2px 2px #555);
 }
 
-.capt:active {
+.dropshie_btn:active {
     filter: none;
 }
 

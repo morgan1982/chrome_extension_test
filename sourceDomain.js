@@ -191,9 +191,6 @@ function getTitle(domainName, callback) {
 
 		    el.className += el.className ? ' product_title' : 'product_title';
 
-		    if ( currentDomain === "vidaxl") { // convert to flex for vidaxl
-		    	el.className += ' vidaTitle'
-		    }
 
 			console.log("prepared title with button", el)
 			callback(el);
@@ -212,11 +209,7 @@ function injectButton(title) {
 	console.log("--inside inject button--", title);
 
 	let btn = document.createElement('span');
-		btn.setAttribute('class', 'capt');
-
-	if ( currentDomain === "vidaxl") {
-		btn.className += " vidaBtn"
-	}
+		btn.setAttribute('class', 'dropshie_btn');
 
 
 
