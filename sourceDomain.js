@@ -37,20 +37,20 @@ function currentDomainFinder( sourceDomains, url) {
 		domain = "costco_uk";
 		return domain
 	}
-	if ( url.includes("walmart") && url.includes("ca") ) {
+	else if ( url.includes("walmart") && url.includes("ca") ) {
 		domain = "walmart_ca";
 		return domain
 	}
-	if ( url.includes("walmart") && url.includes("com") ) {
+	else if ( url.includes("walmart") && url.includes("com") ) {
 		domain = "walmart_com";
 		return domain
 	}
 	// handle target urls
-	if ( url.includes("target") && url.includes("com") && !url.includes("au") ) {
+	else if ( url.includes("target") && url.includes("com") && !url.includes("au") ) {
 		domain = "target_com";
 		return domain
 	}
-	if ( url.includes("target") && url.includes("au") ) {
+	else if ( url.includes("target") && url.includes("au") ) {
 		domain = "target_au";
 		return domain
 	}
