@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "testing_module",
 	"description": "testing filling the form from source",
-	"version": "0.7.1",
+	"version": "0.7.2",
 	"web_accessible_resources": [
 		"images/*"
 	],
@@ -60,7 +60,8 @@
 		"https://livetest.dropshie.com/App/AddInventory.aspx"
 	],
 	"background": {
-		"scripts": ["sourceUrls.js", "background.js"]
+		"scripts": ["sourceUrls.js", "background.js"],
+		"persistent": false
 	}
 
 }

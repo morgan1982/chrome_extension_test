@@ -45,7 +45,6 @@ function messageReceiver(request, sender, sendResponse) {
 		let domain = slicedUrl[2]
 
 		console.log("--the splitted domain--", domain)
-
 		if(domain.includes('uk')) {
 			return domain.replace(/au/g, '')
 		}
@@ -64,6 +63,7 @@ function messageReceiver(request, sender, sendResponse) {
 			return str
 		}
 	}
+
 
 	// extracts an array of the values for the originMarketPlace
 	const extract = url => el => {
@@ -85,6 +85,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 	let origin;
 	console.log("--array after the filter: --", arrOfValues);
+	// debugger;
 	// handle the overstock and target issue
 	if (arrOfValues[1] === "overstock ca" || arrOfValues[1] === "target au" ) {
 		origin = arrOfValues[1]
@@ -119,6 +120,8 @@ function messageReceiver(request, sender, sendResponse) {
 
 		return new Promise((resolve, reject) => {
 
+			console.log("--origin--", origin);
+			// debugger;
 			let productUrl = document.querySelector('#MainContent_TextBoxFrom');
 			productUrl.value += source;
 			let originMarket = document.getElementById("MainContent_DropDownOriginMarketPlace")

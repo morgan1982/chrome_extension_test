@@ -95,7 +95,7 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.hf-BOTContainer .ProductTitle .prod-ProductTitle>div');
 	                break
 	            case "walmart_ca":
-	                title = document.querySelector('#product-desc');
+					title = document.querySelector('#product-desc>h1[data-analytics-type=\'productPage-productName\']');
 	                break
 	            case "target_com":
 	                title = document.querySelector('.styles__DescriptionContainerDiv-vttgqz-3 h1');

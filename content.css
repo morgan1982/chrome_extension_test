@@ -7,7 +7,7 @@
 
 .dropshie_btn {
     flex-shrink: 0;
-    align-self: flex-start;
+    /* align-self: flex-start; */
     margin-left: 10px;
     display: inline-block;
     background-image:url('chrome-extension://__MSG_@@extension_id__/images/inventory_button.png');
