@@ -112,15 +112,10 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('.prod-basic h1');
 	                break
 	            case "costco_uk":
-	                // title = document.querySelector('.product-title-container div[data-bv-show=\'rating_summary\']')
-	                // title = document.querySelector('.bv_main_container')
 	                title = document.querySelector('.product-page-container .hidden-xs h1')
 	                break
 				case "costco":
-					// title = document.querySelector('.product-h1-container');
 					title = document.querySelector('#product-details .product-h1-container>h1');
-					// title = document.querySelector('h1[itemprop=\'name\']');
-	                // title = document.querySelector('.product-h1-container h1[itemprop=\'name\']');
 	                break
 	            case "zooplus":
 	                title = document.querySelector('.product__description');
@@ -190,7 +185,7 @@ function getTitle(domainName, callback) {
 
 		    el.className += el.className ? ' product_title' : 'product_title';
 
-		    if ( currentDomain === "vidaxl") { // convert to flex for vidaxl
+		    if ( currentDomain === "vidaxl" || currentDomain === "homedepot") { // convert to flex to handle vidaxl issue
 		    	el.className += ' vidaTitle'
 		    }
 
@@ -212,14 +207,13 @@ function injectButton(title) {
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'capt');
 
-	if ( currentDomain === "vidaxl") {
+	if ( currentDomain === "vidaxl" || currentDomain === "homedepot") {
 		btn.className += " vidaBtn"
 	}
 
 
 
 	// title.parentNode.insertBefore(btn, title.nextSibling);
-	// title.appendChild(textSpan);
 	title.appendChild(btn);
 
 

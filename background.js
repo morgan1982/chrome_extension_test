@@ -36,8 +36,6 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 
 	let { url, target } = req;
 
-	// console.log(`the url ${ url } the target: ${ target }`);
-
 	if (req.message === "add") {
 		// create the tab
 		tabCreator(req, sender, sendResponse);

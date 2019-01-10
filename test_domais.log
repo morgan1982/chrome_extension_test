@@ -1,36 +1,25 @@
-ebay.com -- button √  --- fills the form  √ -- submits the form (stack on loading)
+// -- current combobox values --
+// walmart (ok)
+// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (ok), costco ca (ok), costco uk (ok),  costco us (ok)
+// ebay ca (ok), ebay uk (ok), ebay us (ok), ebay au (ok), homedepot (ok), overstock ca (ok), overstock (ok), target (ok), target au (ok)
+// vidaxl uk (ok), vidaxl us (cannot access the domain), vidaxl au (ok)
 
-error -- Exception. Object reference not set to an instance of an object.
+// requested domains check if the button is injected
+/*
+		'ebay.com' (y), 'ebay.co.uk' (y), 'ebay.ca' (y), 'ebay.de' (none),
+		'amazon.com (y)', 'amazon.co.uk' (y), 'amazon.ca' (y), 'amazon.com.au' (y),
+		'walmart.com (y)' , 'walmart.ca (y)',
+		'homedepot.com (y)', 'homedepot.ca (y)',
+		'target.com (y)', 'target.com.au (y)',
+		'costco.com (y)', 'costco.co.uk (y)', 'costco.ca (y)', 'costco.com.au (not an e shop)',
+		'overstock.com (y)', 'overstock.ca (y)',
+		'vidaxl.com', 'vidaxl.co.uk (y)', 'vidaxl.com.au (y)', 'vidaxl.de',
+		'zooplus.com', 'zooplus.co.uk', 'zooplus.de',
+		'petplanet.co.uk',
+		'aosom.com', 'aosom.co.uk (y)', 'aosom.ca', 'aosom.de',
+		'thinkgeek.com'
 
-ebay.co.uk -- button √  --- fills the form √ -- submits the form √
-ebay.com.au -- button √  --- fills the form √ -- submits the form √
-ebay.ca -- button   --- fills the form  -- submits the form
-
-
-amazon.com -- button   --- fills the form  -- submits the form
-amazon.co.uk -- button   --- fills the form  -- submits the form
-amazon.au -- button   --- fills the form  -- submits the form
-amazon.ca -- button   --- fills the form  -- submits the form
-
-
-costco.com -- button   --- fills the form  -- submits the form
-costco.co.uk -- button   --- fills the form  -- submits the form
-costco.ca -- button   --- fills the form  -- submits the form
-
-
-target.com -- button   --- fills the form  -- submits the form
-target.au -- button   --- fills the form  -- submits the form
-
-walmart.com -- button   --- fills the form  -- submits the form
-
-overstock.com -- button   --- fills the form  -- submits the form
-overstock.ca -- button   --- fills the form  -- submits the form
-
-vidaxl.com -- button   --- fills the form  -- submits the form
-vidaxl.co.uk -- button   --- fills the form  -- submits the form
-vidaxl.au -- button   --- fills the form  -- submits the form
-
-hemedepot.com -- button   --- fills the form  -- submits the form
+*/
 
 
 

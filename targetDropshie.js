@@ -21,7 +21,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 
 	// format the origin marketplace to set value to combobox
-	// fill new domains here in order to select the correct domain
+	// fill new domains here 
 	const sourceArr = [ "amazon com",
 						"amazon uk",
 						"amazon ca",
@@ -43,8 +43,10 @@ function messageReceiver(request, sender, sendResponse) {
 						"vidaxl au",
 						"vidaxl uk"];
 
-	function removeExtensions (str) {
 
+
+	// removes the common extension for instance  vidaxl.com && vidaxl.com.au
+	function removeCommonExtension (str) {
 
 		const slicedUrl = str.split('/');
 		let domain = slicedUrl[2]
@@ -87,7 +89,7 @@ function messageReceiver(request, sender, sendResponse) {
 	}
 
 	// extracts the current domain name from the url
-	let arrOfValues = sourceArr.filter(extract(removeExtensions(sourceUrl)))
+	let arrOfValues = sourceArr.filter(extract(removeCommonExtension(sourceUrl)))
 
 	let origin;
 	console.log("--array after the filter: --", arrOfValues);
@@ -101,30 +103,6 @@ function messageReceiver(request, sender, sendResponse) {
 	console.log("origin after the filter: ", origin)
 	const convertedOrigin = convertToUs(origin);
 	// console.log("the value for the combobox: ", convertedOrigin);
-
-
-// -- current combobox values --
-// walmart (ok)
-// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (ok), costco ca (ok), costco uk (ok),  costco us (ok)
-// ebay ca (ok), ebay uk (ok), ebay us (ok), ebay au (ok), homedepot (ok), overstock ca (ok), overstock (ok), target (ok), target au (ok)
-// vidaxl uk (ok), vidaxl us (cannot access the domain), vidaxl au (ok)
-
-// requested domains check if the button is injected
-/*
-		'ebay.com' (y), 'ebay.co.uk' (y), 'ebay.ca' (y), 'ebay.de' (none),
-		'amazon.com (y)', 'amazon.co.uk' (y), 'amazon.ca' (y), 'amazon.com.au' (y),
-		'walmart.com (y)' , 'walmart.ca (y)',
-		'homedepot.com (y)', 'homedepot.ca (y)',
-		'target.com (y)', 'target.com.au (y)',
-		'costco.com (y)', 'costco.co.uk (y)', 'costco.ca (y)', 'costco.com.au (not an e shop)',
-		'overstock.com (y)', 'overstock.ca (y)',
-		'vidaxl.com', 'vidaxl.co.uk (y)', 'vidaxl.com.au (y)', 'vidaxl.de',
-		'zooplus.com', 'zooplus.co.uk', 'zooplus.de',
-		'petplanet.co.uk',
-		'aosom.com', 'aosom.co.uk (y)', 'aosom.ca', 'aosom.de',
-		'thinkgeek.com'
-
-*/
 
 
 	function formInputHandler(source, origin) {
