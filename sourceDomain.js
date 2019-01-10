@@ -94,7 +94,7 @@ function getTitle(domainName, callback) {
 					title = document.querySelector('#title');
 					break;
 				case "ebay":
-					title = document.querySelector('#itemTitle');
+					title = document.querySelector('#itemTitlekll');
 					break
 	            case "homedepot":
 	                title = document.querySelector('.product-title__title');
@@ -172,7 +172,7 @@ function getTitle(domainName, callback) {
 					else {
 						console.log("---recurse--")
 						// debugger;
-						setTimeout(() => checker(domainName), 500);
+						setTimeout(() => checker(domainName), 100);
 					}
 				}
 				// init
@@ -186,6 +186,7 @@ function getTitle(domainName, callback) {
 
 		checkForElement(title).then( el => {
 
+
 			console.log("--domain after resolved promise", currentDomain);
 
 		    el.className += el.className ? ' product_title' : 'product_title';
@@ -198,6 +199,7 @@ function getTitle(domainName, callback) {
 			callback(el);
 
 		}).catch( err => {
+			chrome.runtime.sendMessage({ message: "cannot find element" });
 			throw new Error(err)
 		})
 
@@ -234,8 +236,8 @@ function injectButton(title) {
 // parameter: list of companies --
 // parameter: current page url
 // returns the domainName of the current page
-let raw_domains = new Domains() // object from sourceUrls.js
-let domains = raw_domains.domains
+let raw_domains = new Domains(); // object from sourceUrls.js
+let domains = raw_domains.domains;
 
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 

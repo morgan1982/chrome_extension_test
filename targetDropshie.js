@@ -15,11 +15,6 @@ function messageReceiver(request, sender, sendResponse) {
 		// debugger;
 	}
 
-
-
-
-
-
 	// format the origin marketplace to set value to combobox
 	// fill new domains here in order to select the correct domain
 	const sourceArr = [ "amazon com",
@@ -70,7 +65,6 @@ function messageReceiver(request, sender, sendResponse) {
 		}
 	}
 
-// 			"run_at": "document_end",
 	// extracts an array of the values for the originMarketPlace
 	const extract = url => el => {
 
@@ -102,12 +96,6 @@ function messageReceiver(request, sender, sendResponse) {
 	const convertedOrigin = convertToUs(origin);
 	// console.log("the value for the combobox: ", convertedOrigin);
 
-
-// -- current combobox values --
-// walmart (ok)
-// amazon ca (ok), amazon uk (ok), amazon us (ok), amazon au (ok), costco ca (ok), costco uk (ok),  costco us (ok)
-// ebay ca (ok), ebay uk (ok), ebay us (ok), ebay au (ok), homedepot (ok), overstock ca (ok), overstock (ok), target (ok), target au (ok)
-// vidaxl uk (ok), vidaxl us (cannot access the domain), vidaxl au (ok)
 
 // requested domains check if the button is injected
 /*
@@ -152,7 +140,6 @@ function messageReceiver(request, sender, sendResponse) {
 			let btn = document.getElementById('MainContent_ButtonSubmit')
 			btn.click()
 		}).catch( er => console.log("Error", er))
-
 
 
 }

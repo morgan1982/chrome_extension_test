@@ -43,5 +43,17 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 		tabCreator(req, sender, sendResponse);
 		sendResponse({ message: "product added" })
 	}
+	if (req.message === "cannot find element") {
+		console.log("testing the notification system");
+
+		let notif = {
+			type: "basic",
+			iconUrl: chrome.extension.getURL('./assets/target.png'),
+			title: "dropshie paste",
+			message: "Couldn't add button",
+			isClickable: true
+		}
+		chrome.notifications.create(notif)
+	}
 })
 
