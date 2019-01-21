@@ -57,3 +57,16 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 	}
 })
 
+chrome.webNavigation.onHistoryStateUpdated.addListener(() => {
+	console.log("the dom is updated")
+	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+		chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
+			if (res) {
+				console.log(`from updated dom ${res.message}`)
+			}
+		})
+	})
+})
+
+chrome.runtime.sendMessage({message: "from under"})
+

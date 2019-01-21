@@ -54,6 +54,7 @@
 	},
 	"permissions": [
 		"activeTab",
+		"webNavigation",
 		"storage",
 		"tabs",
 		"notifications",

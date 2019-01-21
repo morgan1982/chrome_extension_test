@@ -5,15 +5,15 @@ window.onload = function () {
         title.className += title.className ? " product_title" : "product_title";
     }
 
-    const btn_container = document.createElement('div');
-    btn_container.className = 'btn_container'
     const btn = document.createElement('span');
-    btn.className = "dropshie_btn";
-    const btnText = document.createTextNode('add to dropshie');
-    btn.appendChild(btnText);
-    btn_container.appendChild(btn);
+    btn.className = "capt";
 
-    title.appendChild(btn_container)
+    title.appendChild(btn);
+
+
+    function Animate() {
+        btn.className += " animate";
+    }
 }
 
 

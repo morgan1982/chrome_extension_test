@@ -11,28 +11,20 @@
     margin-bottom: 10px;
 }
 
-/*.capt {
+.capt {
     position: relative;
     margin-left: 10px;
     top: 5px;
-    background-image: url(../assets/inventory_button.png);
+    background-image: url(../images/inventory_button.png);
     background-position: center;
     background-size: cover;
     height: 40px;
     width: 40px;
     animation: appear .4s ease-out;
     cursor: pointer;
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .3));
-    filter: drop-shadow(2px 3px 6px #444);
-}*/
-
-/*.capt {
-    background-image: url(../assets/inventory_button.png);
-    animation: appear .4s ease-out;
-    cursor: pointer;
-    filter: drop-shadow(2px 3px 6px #444);
-
-}*/
+    /* filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, .3)); */
+    /* filter: drop-shadow(2px 3px 6px #444); */
+}
 
 .capt:hover {
     filter: drop-shadow(1px 2px 3px #555);
