@@ -87,9 +87,10 @@ function messageReceiver(request, sender, sendResponse) {
 	console.log("--array after the filter: --", arrOfValues);
 	// debugger;
 	// handle the overstock and target issue
+	// cases in which in the sourceArray there is values for the same domain without suffix (like the pair overstock && overstock ca)
+	// have to be handled here!
 	if (arrOfValues[1] === "overstock ca" || arrOfValues[1] === "target au" ) {
 		origin = arrOfValues[1]
-		// debugger;
 	} else {
 		origin = arrOfValues.join() // the value for originMarketplace
 	}

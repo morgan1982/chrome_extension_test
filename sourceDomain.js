@@ -8,15 +8,13 @@ function companyNameExtractor(domains) {
 
 	const companies = [];
 	let company = null;
+
 	for (company of domains) {
-
 		let name = company.split('.')[0]
-
 
 		if (!companies.includes(name)) {
 			companies.push(name)
 		}
-
 	}
 	return companies; // returns a array of companies
 }
@@ -31,8 +29,8 @@ function currentDomainFinder( sourceDomains, url) {
 	// console.log('splited url', url);
 
 	// have to dry the code
-	// handle the different extensions for walmart
-	// console.log(`url is: ${ url }`);
+	// handles the different extensions for walmart
+	console.log(`url is: ${ url }`);
 	if ( url.includes("costco") && url.includes("uk") ) {
 		domain = "costco_uk";
 		return domain
@@ -68,72 +66,31 @@ function currentDomainFinder( sourceDomains, url) {
 
 }
 
-// return the title element of the page
-function getTitle(domainName, callback) {
-		let title = null;
-		console.log(`the domainName for switch: ${ domainName }`)
+// provide new supplier here
+const supplierAtributes = {
+	amazon: '#title',
+	ebay: '#itemTitle',
+	homedepot: '.product-title__title',
+	walmart_com: '.hf-BOTContainer .ProductTitle .prod-ProductTitle>div',
+	walmart_ca: '#product-desc',
+	target_com: '.styles__DescriptionContainerDiv-vttgqz-3 h1',
+	target_au:  '.prod-basic h1',
+	costco_uk: '.product-page-container .hidden-xs h1',
+	costco: '#product-details .product-h1-container>h1',
+	zooplus: '.product__description',
+	aosom: '.product-name',
+	petplanet: '.container--product-name',
+	thinkgeek: '.header',
+	vidaxl: '.container-top>.title',
+	overstock: '.product-title>h1'
+
+}
+// returns the title element of the page
+function getTitle(domainName, supplierAtributesObj, callback) {
 
 
-		const setTitle = domainName => {
-
-
-			// dry that with a map or something
-			// put donains and selectors to a dictionary
-			switch (domainName) {
-
-				// selects the proper element in each page in order to inject the button
-				case "amazon":
-					title = document.querySelector('#title');
-					break;
-				case "ebay":
-					title = document.querySelector('#itemTitle');
-					break
-	            case "homedepot":
-	                title = document.querySelector('.product-title__title');
-	                break
-	            case "walmart_com":
-	                title = document.querySelector('.hf-BOTContainer .ProductTitle .prod-ProductTitle>div');
-	                break
-	            case "walmart_ca":
-					title = document.querySelector('#product-desc>h1[data-analytics-type=\'productPage-productName\']');
-	                break
-	            case "target_com":
-	                title = document.querySelector('.styles__DescriptionContainerDiv-vttgqz-3 h1');
-	                break
-	            case "target_au":
-	                title = document.querySelector('.prod-basic h1');
-	                break
-	            case "costco_uk":
-	                title = document.querySelector('.product-page-container .hidden-xs h1')
-	                break
-				case "costco":
-					title = document.querySelector('#product-details .product-h1-container>h1');
-	                break
-	            case "zooplus":
-	                title = document.querySelector('.product__description');
-	                break
-	            case "aosom":
-	                title = document.querySelector('.product-name');
-	                break
-	            case "petplanet":
-	                title = document.querySelector('.container--product-name');
-	                break
-	            case "thinkgeek":
-	                title = document.querySelector('.header');
-	                break
-	            case "vidaxl":
-	                title = document.querySelector('.container-top>.title');
-	                break
-	            case "overstock":
-	                title = document.querySelector('.product-title>h1');
-					break
-				default:
-					title = "self destruction"
-			}
-			// if the url is target.com send message to back
-			return title;
-		}
-
+		let title = document.querySelector(supplierAtributesObj[domainName]);
+		console.log("new title creator", title);
 
 		const checkForElement = element => {
 
@@ -141,11 +98,9 @@ function getTitle(domainName, callback) {
 				return new Promise ( (resolve, reject) => {
 
 				let counter = 0
-
 				// check for the element in the dom
 				const checker =  domainName => {
 
-		            title = setTitle(domainName);
 					counter += 1;
 
 					if (title){
@@ -203,7 +158,6 @@ function injectButton(title) {
 
 
 	// title.parentNode.insertBefore(btn, title.nextSibling);
-	// title.appendChild(textSpan);
 	title.appendChild(btn);
 
 
@@ -247,7 +201,7 @@ let domains = raw_domains.domains;
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
 // gets the title element in order to inject the button
-getTitle(currentDomain, title => {
+getTitle(currentDomain,supplierAtributes, title => {
 	console.log("--after the getTitle function--", title)
 	// ObserveTitle(title, injectButton);
 	injectButton(title);
