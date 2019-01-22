@@ -98,7 +98,7 @@ function getTitle(domainName, callback) {
 	                title = document.querySelector('#product-desc');
 	                break
 	            case "target_com":
-	                title = document.querySelector('.styles__DescriptionContainerDiv-vttgqz-3 h1');
+					title = document.querySelector('.styles__DescriptionContainerDiv-vttgqz-3 h1');
 	                break
 	            case "target_au":
 	                title = document.querySelector('.prod-basic h1');
