@@ -88,8 +88,6 @@ const supplierAtributes = {
 // returns the title element of the page
 function getTitle(domainName, supplierAtributesObj, callback) {
 
-		console.log(`the domainName for switch: ${ domainName }`);
-
 
 		let title = document.querySelector(supplierAtributesObj[domainName]);
 		console.log("new title creator", title);
@@ -100,11 +98,9 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 				return new Promise ( (resolve, reject) => {
 
 				let counter = 0
-
 				// check for the element in the dom
 				const checker =  domainName => {
 
-		            // title = setTitle(domainName);
 					counter += 1;
 
 					if (title){
