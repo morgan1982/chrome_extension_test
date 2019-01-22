@@ -56,9 +56,10 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 		chrome.notifications.create(notif)
 	}
 })
-
+let updateCounter = 0;
 chrome.webNavigation.onHistoryStateUpdated.addListener(() => {
-	console.log("the dom is updated")
+	updateCounter++;
+	console.log("the dom is updated: ", updateCounter);
 	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
 		chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
 			if (res) {

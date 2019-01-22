@@ -87,6 +87,8 @@ const supplierAtributes = {
 }
 // returns the title element of the page
 function getTitle(domainName, supplierAtributesObj, callback) {
+		console.log('inside getTitle', domainName);
+		console.log('inside getTitle', supplierAtributes);
 
 
 		let title = document.querySelector(supplierAtributesObj[domainName]);
@@ -219,7 +221,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			getTitle(currentDomain, supplierAtributes, title => {
 				injectButton(title);
 			})
-		}, 500) // ON SLOW 3G HAVE TO USE 3000ms
+		}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
 		sendResponse({ message:"content reload..."})
 	}
 });
