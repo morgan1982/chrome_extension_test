@@ -107,7 +107,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 						console.log("element found: ", title);
 						return resolve(title)
 					}
-					if (counter >= 20) {
+					else if (counter >= 20) {
 						// stop conndition
 						return reject("cannot find element")
 					}
@@ -216,7 +216,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if ( message === "domUpdated") {
 		console.log(`from the dom update ${ message }`);
 		setTimeout(() => {
-			getTitle(currentDomain, title => {
+			getTitle(currentDomain, supplierAtributes, title => {
 				injectButton(title);
 			})
 		}, 500) // ON SLOW 3G HAVE TO USE 3000ms
