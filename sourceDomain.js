@@ -23,13 +23,12 @@ function companyNameExtractor(domains) {
 function currentDomainFinder( sourceDomains, url) {
 
 	let domain = null;
-
 	// extract the domain from the url
 	url = url.split('/')[2];
 	// console.log('splited url', url);
 
 	// have to dry the code
-	// handles the different extensions for walmart
+	// handles the different extensions for walmart, costco & target
 	console.log(`url is: ${ url }`);
 	if ( url.includes("costco") && url.includes("uk") ) {
 		domain = "costco_uk";
@@ -60,13 +59,11 @@ function currentDomainFinder( sourceDomains, url) {
 				break;
 			}
 	}
-
-
 	return domain
 
 }
 
-// provide new supplier here
+// provide new supplier here with the corresponding attribute
 const supplierAtributes = {
 	amazon: '#title',
 	ebay: '#itemTitle',
@@ -87,8 +84,8 @@ const supplierAtributes = {
 }
 // returns the title element of the page
 function getTitle(domainName, supplierAtributesObj, callback) {
-		console.log('inside getTitle', domainName);
-		console.log('inside getTitle', supplierAtributes);
+		// console.log('inside getTitle', domainName);
+		// console.log('inside getTitle', supplierAtributes);
 
 
 		let title = document.querySelector(supplierAtributesObj[domainName]);
@@ -140,7 +137,6 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 			callback(el);
 
 		}).catch( err => {
-			// chrome.runtime.sendMessage({ message: "cannot find element" });
 			throw new Error(err)
 		})
 
@@ -149,15 +145,9 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 
 
 function injectButton(title) {
-	// Mutation Observer
-	
-	// console.log("--inside inject button--", title);
-
 
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'dropshie_btn');
-
-
 
 	// title.parentNode.insertBefore(btn, title.nextSibling);
 	title.appendChild(btn);
@@ -168,31 +158,6 @@ function injectButton(title) {
 	})
 
 }
-// MUTATION OBSERVER GOOD LUCK 
-function ObserveTitle(title, injector) {
-	injector(title);
-	let target = document.querySelector()
-	let config = {
-		attributes: false,
-		childList: true,
-		subtree: true
-	}
-	let callback = (mutationList, observer) => {
-		for (let mutation of mutationList) {
-			if (mutation.type == "childList") {
-				console.log("A child has added or removed")
-				injector(title);
-			}
-		}
-	}
-
-	const observer = new MutationObserver(callback);
-	observer.observe(title, config);
-
-	// console.log("observe", title);
-}
-
-
 
 // parameter: list of companies --
 // parameter: current page url
@@ -211,17 +176,22 @@ getTitle(currentDomain,supplierAtributes, title => {
 
 });
 
-// After dom update
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	console.log("--runtime--", request)
-	let { message } = request;
-	if ( message === "domUpdated") {
-		console.log(`from the dom update ${ message }`);
-		setTimeout(() => {
-			getTitle(currentDomain, supplierAtributes, title => {
-				injectButton(title);
-			})
-		}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
-		sendResponse({ message:"content reload..."})
-	}
-});
+// handle dom updates on target.com
+if (currentDomain === "target_com") {
+	chrome.runtime.sendMessage({ message: "target"});
+
+	// receive the dom update event and inject the button again
+	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+		console.log("--runtime--", request)
+		let { message } = request;
+		if ( message === "domUpdated") {
+			setTimeout(() => {
+				getTitle(currentDomain, supplierAtributes, title => {
+					injectButton(title);
+				})
+			}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
+			sendResponse({ message:"content reload..."})
+		}
+	});
+}
+

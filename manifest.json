@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "testing_module",
 	"description": "testing filling the form from source",
-	"version": "0.7.2",
+	"version": "0.7.3",
 	"web_accessible_resources": [
 		"images/*"
 	],
@@ -29,6 +29,7 @@
 				"https://www.walmart.ca/*",
 				"https://www.aosom.co.uk/*",
 				"https://intl.target.com/*",
+				"https://www.target.com/*",
 				"https://www.target.com.au/*",
 				"https://www.zooplus.com/*",
 				"https://www.petplanet.co.uk/*",

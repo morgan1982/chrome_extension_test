@@ -24,11 +24,7 @@ function tabCreator (request, sender, sendResponse) {
 				title
 			})
 		})
-
-
-
 	})
-
 }
 
 
@@ -56,18 +52,24 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 		chrome.notifications.create(notif)
 	}
 })
+
 let updateCounter = 0;
-chrome.webNavigation.onHistoryStateUpdated.addListener(() => {
-	updateCounter++;
-	console.log("the dom is updated: ", updateCounter);
-	chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-		chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
-			if (res) {
-				console.log(`from updated dom ${res.message}`)
-			}
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+	let { message } = request;
+	console.log("message: ", message);
+	if ( message === "target") {
+		chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
+			updateCounter++;
+			console.log("the dom is updated: ", updateCounter, obj);
+			chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+				chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
+					if (res) {
+						console.log(`from updated dom ${res.message}`)
+					}
+				})
+			})
 		})
-	})
+	}
 })
 
-chrome.runtime.sendMessage({message: "from under"})
 
