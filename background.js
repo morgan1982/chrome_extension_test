@@ -12,7 +12,7 @@ function tabCreator (request, sender, sendResponse) {
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
-		active: true // sets the tab to be active
+		active: false // sets the tab to be active
 	}, (tab) => {
 
 		// execute the script after the tab is loaded
@@ -33,43 +33,56 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 	let { url, target } = req;
 
 	// console.log(`the url ${ url } the target: ${ target }`);
-
+	// REMOVE FOR NOW
 	if (req.message === "add") {
 		// create the tab
 		tabCreator(req, sender, sendResponse);
 		sendResponse({ message: "product added" })
 	}
-	if (req.message === "cannot find element") {
-		console.log("testing the notification system");
-
-		let notif = {
-			type: "basic",
-			iconUrl: chrome.extension.getURL('./assets/target.png'),
-			title: "dropshie paste",
-			message: "Couldn't add button",
-			isClickable: true
-		}
-		chrome.notifications.create(notif)
-	}
 })
 
+function sendUpdatedMessage(tabs) {
+
+	chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
+		if (res) {
+			console.log(`from updated dom ${res.message}`)
+			console.log("check the array", porductUrls);
+		}
+	})
+}
+
+
+// FOR PAGES THAT THEY UPDATE ONLY PARTS OF THE DOM
+// the logic makes sure that the content script will run again in such cases
 let updateCounter = 0;
+let porductUrls = []; // newUrl1
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	let { message } = request;
 	console.log("message: ", message);
 	if ( message === "target") {
 		chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
+			porductUrls.push(obj.url);
 			updateCounter++;
-			console.log("the dom is updated: ", updateCounter, obj);
+			console.log("the dom is updated: ", updateCounter, obj.url);
 			chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-				chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
-					if (res) {
-						console.log(`from updated dom ${res.message}`)
+				console.log("inside the update event", obj.url)
+				// only update if there is a new product
+				if (porductUrls.length > 1) {
+					if (porductUrls[porductUrls.length -2] !== [porductUrls.length -1]) {
+						sendUpdatedMessage(tabs)
 					}
-				})
+					// clean the array from the garbage keeps 3 elements max
+					if (porductUrls.length > 3) {
+						porductUrls.splice(0, porductUrls.length -2)
+					}
+				}else if (porductUrls.length <= 1){
+					sendUpdatedMessage(tabs);
+				}
+
+
 			})
 		})
 	}
 })
-
+// 5 element 
 

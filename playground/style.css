@@ -1,11 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-
-/** {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}*/
-
 .product_title {
     display: flex;
     margin-bottom: 10px;
@@ -52,6 +44,79 @@ body {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.box-container {
+    display: flex;
+    padding: 10px;
+}
+
+.box_open {
+    position: relative;
+    height: 50px;
+    width: 60px;
+    background: url(../images/box_open.svg) no-repeat;
+    transform: scale(1.6);  
+}
+.box_open:hover {
+    filter: drop-shadow(1px 2px 3px #555);
+    /* box-shadow: 2px 2px 2px #555; */
+}
+
+.box_closed {
+    /* display: block; */
+    position: relative;
+    height: 50px;
+    width: 60px;
+    background: url(../images/box_closed.svg) no-repeat;
+    transform: scale(1.6);
+    backface-visibility: hidden;
+}
+
+.box_closed::before {
+    position: absolute;
+    top: -148px;
+    left: -41px;
+    content: "";
+    display: block;
+    width:140px;
+    height:148px;
+    background: url(../images/parachute.svg) no-repeat;
+    /* animation: rotate ease-in-out 1s infinite alternate; */
+}
+
+.fly {
+    /* animation: launch 2s ease-out infinite alternate; */
+    animation: launch 1s infinite ease-in-out ,rotate ease-in-out 1s infinite alternate;
+    /* transform: scale(1.6); */
+}
+
+@keyframes launch {
+    0% {
+        transform: translateY(0px) scale(1.6);
+    }
+    10% {
+        transform: translateY(10px) scale(1.5);
+    }
+
+    30% {
+        transform: translateY(-70px) scale(1.4);
+    }
+    50% {
+        transform: translateY(-100px) scale(1.2);
+    }
+    100% {
+        transform: translateY(-500px) scale(1);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(3deg);
+    }
+    100% {
+        transform: rotate(-3deg);
     }
 }
 
