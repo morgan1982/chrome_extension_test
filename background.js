@@ -52,7 +52,7 @@ function sendUpdatedMessage(tabs) {
 }
 
 
-// FOR PAGES THAT THEY UPDATE ONLY PARTS OF THE DOM
+// FOR PAGES THAT UPDATE ONLY PARTS OF THE DOM
 // the logic makes sure that the content script will run again in such cases
 let updateCounter = 0;
 let porductUrls = []; // newUrl1
@@ -71,7 +71,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 					if (porductUrls[porductUrls.length -2] !== [porductUrls.length -1]) {
 						sendUpdatedMessage(tabs)
 					}
-					// clean the array from the garbage keeps 3 elements max
+					// cleans the array from the garbage keeps 3 elements max
 					if (porductUrls.length > 3) {
 						porductUrls.splice(0, porductUrls.length -2)
 					}
