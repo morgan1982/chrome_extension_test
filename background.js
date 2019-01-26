@@ -30,9 +30,7 @@ function tabCreator (request, sender, sendResponse) {
 
 chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 
-	let { url, target } = req;
 
-	// console.log(`the url ${ url } the target: ${ target }`);
 	// REMOVE FOR NOW
 	if (req.message === "add") {
 		// create the tab
@@ -52,37 +50,34 @@ function sendUpdatedMessage(tabs) {
 }
 
 
-// FOR PAGES THAT UPDATE ONLY PARTS OF THE DOM
+// FOR PAGES WITH ASYNC SCRIPTS .....SERIOUSLY???
 // the logic makes sure that the content script will run again in such cases
 let updateCounter = 0;
 let porductUrls = []; // newUrl1
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	let { message } = request;
-	console.log("message: ", message);
-	if ( message === "target") {
-		chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
-			porductUrls.push(obj.url);
-			updateCounter++;
-			console.log("the dom is updated: ", updateCounter, obj.url);
-			chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-				console.log("inside the update event", obj.url)
-				// only update if there is a new product
-				if (porductUrls.length > 1) {
-					if (porductUrls[porductUrls.length -2] !== [porductUrls.length -1]) {
-						sendUpdatedMessage(tabs)
-					}
-					// cleans the array from the garbage keeps 3 elements max
-					if (porductUrls.length > 3) {
-						porductUrls.splice(0, porductUrls.length -2)
-					}
-				}else if (porductUrls.length <= 1){
-					sendUpdatedMessage(tabs);
+
+chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
+	console.log("__history event fired")
+		porductUrls.push(obj.url);
+		updateCounter++;
+		console.log("the dom is updated: ", updateCounter, obj.url);
+		chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+			console.log("inside the update event", obj.url)
+			// only update if there is a new product
+			if (porductUrls.length > 1) {
+				if (porductUrls[porductUrls.length -2] !== [porductUrls.length -1]) {
+					sendUpdatedMessage(tabs)
 				}
+				// cleans the array from the garbage keeps 3 elements max
+				if (porductUrls.length > 3) {
+					porductUrls.splice(0, porductUrls.length -2)
+				}
+			}else if (porductUrls.length <= 1){
+				sendUpdatedMessage(tabs);
+			}
 
 
-			})
 		})
-	}
-})
+}, {url: [ {hostContains : 'target'} ]})
 // 5 element 
 
+// chrome.webNavigation.onCommitted.addListener(function() {console.log("complete event")});

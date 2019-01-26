@@ -159,12 +159,14 @@ function injectButton(title) {
 
 }
 
+
+let raw_domains = new Domains(); // object from sourceUrls.js
+let domains = raw_domains.domains;
+let injectionSucceded = false;
+
 // parameter: list of companies --
 // parameter: current page url
 // returns the domainName of the current page
-let raw_domains = new Domains(); // object from sourceUrls.js
-let domains = raw_domains.domains;
-
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
 
 // gets the title element in order to inject the button
@@ -172,11 +174,27 @@ getTitle(currentDomain,supplierAtributes, title => {
 	console.log("--after the getTitle function--", title)
 	// ObserveTitle(title, injectButton);
 	injectButton(title);
-
-
+	if (title) {
+		injectionSucceded = true;
+	}
 });
 
-// handle dom updates on target.com
+// failsafe for sites like target.com using async scripts
+document.onreadystatechange = function () {
+	if ( document.readyState === "complete") {
+		console.log("____Completed injection: ", injectionSucceded);
+		if (!injectionSucceded) {
+			getTitle(currentDomain, supplierAtributes, title => {
+				console.log("__recurse the target__");
+				injectButton(title);
+				injectionSucceded = true
+			})
+		}
+	}
+}
+
+
+
 if (currentDomain === "target_com") {
 	chrome.runtime.sendMessage({ message: "target"});
 
@@ -185,13 +203,61 @@ if (currentDomain === "target_com") {
 		console.log("--runtime--", request)
 		let { message } = request;
 		if ( message === "domUpdated") {
-			setTimeout(() => {
+
+		if ( document.readyState === "complete") {
+			console.log("____Completed")
+			if (!injectionSucceded) {
 				getTitle(currentDomain, supplierAtributes, title => {
+					console.log("__recurse the target__");
 					injectButton(title);
+					injectionSucceded = true
 				})
+			}
+		}	
+			setTimeout(() => {
+				let btn = document.querySelector('.dropshie_btn');
+				if(!btn) {
+					getTitle(currentDomain, supplierAtributes, title => {
+						injectButton(title);
+					})					
+				}
+
 			}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
 			sendResponse({ message:"content reload..."})
 		}
 	});
 }
+
+
+// handle dom updates on target.com
+// if (currentDomain === "target_com") {
+// 	console.log("----window---", window);
+// 	// DOMSubtreeModified
+// 	console.log("DOCUMENT", document.readyState);
+// 	document.onreadystatechange = function () {
+// 		if (document.readyState === "complete") {
+// 			console.log("---------Completed")
+// 		}
+// 	}
+// 	if (document.readyState === "complete") {
+// 		console.log("FUlly LOAD");
+// 	}
+// 	document.addEventListener("load", e => {
+// 		console.log("--subtree modified--", e.path[0].baseURI)
+// 		chrome.runtime.sendMessage({ message: "target", uri: e.path[0].baseURI});
+// 	})
+// 	// receive the dom update event and inject the button again
+// 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+// 		console.log("--runtime--", request)
+// 		let { message } = request;
+// 		if ( message === "domUpdated") {
+// 			setTimeout(() => {
+// 				getTitle(currentDomain, supplierAtributes, title => {
+// 					injectButton(title);
+// 				})
+// 			}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
+// 			sendResponse({ message:"content reload..."})
+// 		}
+// 	});
+// }
 
