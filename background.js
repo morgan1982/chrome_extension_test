@@ -12,7 +12,7 @@ function tabCreator (request, sender, sendResponse) {
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
-		active: false // sets the tab to be active
+		active: true // sets the tab to be active
 	}, (tab) => {
 
 		// execute the script after the tab is loaded
@@ -39,12 +39,14 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 	}
 })
 
+
+// fires when the injections needs to rerun 
 function sendUpdatedMessage(tabs) {
 
 	chrome.tabs.sendMessage(tabs[0].id, { message: "domUpdated"}, res => {
 		if (res) {
-			console.log(`from updated dom ${res.message}`)
-			console.log("check the array", porductUrls);
+			// console.log(`from updated dom ${res.message}`)
+			// console.log("check the array", porductUrls);
 		}
 	})
 }
@@ -61,7 +63,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
 		updateCounter++;
 		console.log("the dom is updated: ", updateCounter, obj.url);
 		chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-			console.log("inside the update event", obj.url)
+			// console.log("inside the update event", obj.url)
 			// only update if there is a new product
 			if (porductUrls.length > 1) {
 				if (porductUrls[porductUrls.length -2] !== [porductUrls.length -1]) {
@@ -77,6 +79,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((obj) => {
 
 
 		})
+// apply filters here
 }, {url: [ {hostContains : 'target'} ]})
 // 5 element 
 

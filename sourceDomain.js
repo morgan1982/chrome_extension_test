@@ -1,4 +1,4 @@
-console.log("inside source");
+// console.log("inside source");
 
 // the url of the tab
 const currentUrl = window.location.href;
@@ -25,11 +25,9 @@ function currentDomainFinder( sourceDomains, url) {
 	let domain = null;
 	// extract the domain from the url
 	url = url.split('/')[2];
-	// console.log('splited url', url);
 
-	// have to dry the code
 	// handles the different extensions for walmart, costco & target
-	console.log(`host: ${ url }`);
+	// console.log(`host: ${ url }`);
 	if ( url.includes("costco") && url.includes("uk") ) {
 		domain = "costco_uk";
 		return domain
@@ -63,7 +61,7 @@ function currentDomainFinder( sourceDomains, url) {
 
 }
 
-// provide new supplier here with the corresponding attribute
+// attribute values to target the elements for each host
 const supplierAtributes = {
 	amazon: '#title',
 	ebay: '#itemTitle',
@@ -89,7 +87,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 
 
 		let title = document.querySelector(supplierAtributesObj[domainName]);
-		console.log("new title creator", title);
+		// console.log("new title creator", title);
 
 		const checkForElement = element => {
 
@@ -103,7 +101,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 					counter += 1;
 
 					if (title){
-						console.log("element found: ", title);
+						// console.log("element found: ", title);
 						return resolve(title)
 					}
 					else if (counter >= 20) {
@@ -111,7 +109,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 						return reject("cannot find element")
 					}
 					else {
-						console.log("---recurse--")
+						// console.log("___Recurse elemenent fiunder")
 						setTimeout(() => checker(domainName), 100);
 					}
 				}
@@ -164,7 +162,7 @@ const currentDomain = currentDomainFinder( companyNameExtractor(domains), curren
 
 // gets the title element in order to inject the button
 getTitle(currentDomain,supplierAtributes, title => {
-	console.log("--after the getTitle function--", title)
+	// console.log("--after the getTitle function--", title)
 	// ObserveTitle(title, injectButton);
 	injectButton(title);
 	if (title) {
@@ -173,12 +171,14 @@ getTitle(currentDomain,supplierAtributes, title => {
 });
 
 // failsafe for sites like target.com using async scripts
+// runs always at the end of the document
 document.onreadystatechange = function () {
 	if ( document.readyState === "complete") {
-		console.log("____Completed injection: ", injectionSucceded);
+		// checks if the injection succeded
+		// console.log("____Completed injection: ", injectionSucceded);
 		if (!injectionSucceded) {
 			getTitle(currentDomain, supplierAtributes, title => {
-				console.log("__recurse the target__");
+				// console.log("__running injection again__");
 				injectButton(title);
 				injectionSucceded = true
 			})
@@ -193,15 +193,15 @@ if (currentDomain === "target_com") {
 
 	// receive the dom update event and inject the button again
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-		console.log("--runtime--", request)
+		// console.log("--runtime--", request)
 		let { message } = request;
 		if ( message === "domUpdated") {
 
 		if ( document.readyState === "complete") {
-			console.log("____Completed")
+			// console.log("____Completed")
 			if (!injectionSucceded) {
 				getTitle(currentDomain, supplierAtributes, title => {
-					console.log("__run  the injection again__");
+					// console.log("__run  the injection again__");
 					injectButton(title);
 					injectionSucceded = true
 				})
@@ -221,36 +221,4 @@ if (currentDomain === "target_com") {
 	});
 }
 
-
-// handle dom updates on target.com
-// if (currentDomain === "target_com") {
-// 	console.log("----window---", window);
-// 	// DOMSubtreeModified
-// 	console.log("DOCUMENT", document.readyState);
-// 	document.onreadystatechange = function () {
-// 		if (document.readyState === "complete") {
-// 			console.log("---------Completed")
-// 		}
-// 	}
-// 	if (document.readyState === "complete") {
-// 		console.log("FUlly LOAD");
-// 	}
-// 	document.addEventListener("load", e => {
-// 		console.log("--subtree modified--", e.path[0].baseURI)
-// 		chrome.runtime.sendMessage({ message: "target", uri: e.path[0].baseURI});
-// 	})
-// 	// receive the dom update event and inject the button again
-// 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-// 		console.log("--runtime--", request)
-// 		let { message } = request;
-// 		if ( message === "domUpdated") {
-// 			setTimeout(() => {
-// 				getTitle(currentDomain, supplierAtributes, title => {
-// 					injectButton(title);
-// 				})
-// 			}, 1500) // ON SLOW 3G HAVE TO USE 3000ms
-// 			sendResponse({ message:"content reload..."})
-// 		}
-// 	});
-// }
 

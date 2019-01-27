@@ -16,8 +16,8 @@ window.onload = function () {
         
      }
 
-    // Fly();
-    Spin();
+    Fly();
+    // Spin();
 
     function Fly() {
 
