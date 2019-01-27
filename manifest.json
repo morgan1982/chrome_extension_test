@@ -50,15 +50,13 @@
 		}
 	],
 	"icons": {
-		"48": "/assets/target.png",
-		"16": "/assets/target.png"
+		"48": "/images/target.png",
+		"16": "/images/target.png"
 	},
 	"permissions": [
 		"activeTab",
 		"webNavigation",
-		"storage",
 		"tabs",
-		"notifications",
 		"https://livetest.dropshie.com/App/AddInventory.aspx"
 	],
 	"background": {
