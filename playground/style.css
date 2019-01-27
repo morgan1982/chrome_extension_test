@@ -49,7 +49,7 @@ body {
 
 .box-container {
     display: flex;
-    padding: 10px;
+    /* padding: 10px; */
 }
 .active {
     animation: rotate ease-in-out 1s infinite alternate;
@@ -57,10 +57,11 @@ body {
 
 .box_open {
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
     background: url(../images/new_box_open.svg) no-repeat;
-    background-size: 70px 70px;
+    background-size: contain;
+    cursor: pointer;
     /* transform: scale(1.6); */
 }
 .box_open:hover {
@@ -71,23 +72,27 @@ body {
 .box_closed {
     /* display: block; */
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
+    top: 0%;
+    left: 0%;
     background: url(../images/new_box_closed.svg) no-repeat;
-    background-size: 70px 70px;
+    /* background-size: 60px 60px; */
+    background-size: contain;
     /* transform: scale(1.6); */
     backface-visibility: hidden;
 }
 
 .box_closed::before {
     position: absolute;
-    top: -137px;
-    left: -34px;
+    top: -148%;
+    left: -19%;
     content: "";
     display: block;
-    width:140px;
-    height:148px;
+    width:150%;
+    height:150%;
     background: url(../images/parachute.svg) no-repeat;
+    background-size: contain; 
     /* animation: rotate ease-in-out 1s infinite alternate; */
 }
 

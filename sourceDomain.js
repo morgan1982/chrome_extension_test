@@ -29,7 +29,7 @@ function currentDomainFinder( sourceDomains, url) {
 
 	// have to dry the code
 	// handles the different extensions for walmart, costco & target
-	console.log(`url is: ${ url }`);
+	console.log(`host: ${ url }`);
 	if ( url.includes("costco") && url.includes("uk") ) {
 		domain = "costco_uk";
 		return domain
@@ -127,13 +127,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 
 		checkForElement(title).then( el => {
 
-
-			console.log("--domain after resolved promise", currentDomain);
-
 		    el.className += el.className ? ' product_title' : 'product_title';
-
-
-			// console.log("prepared title with button", el)
 			callback(el);
 
 		}).catch( err => {
@@ -149,7 +143,6 @@ function injectButton(title) {
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'dropshie_btn');
 
-	// title.parentNode.insertBefore(btn, title.nextSibling);
 	title.appendChild(btn);
 
 
@@ -208,7 +201,7 @@ if (currentDomain === "target_com") {
 			console.log("____Completed")
 			if (!injectionSucceded) {
 				getTitle(currentDomain, supplierAtributes, title => {
-					console.log("__recurse the target__");
+					console.log("__run  the injection again__");
 					injectButton(title);
 					injectionSucceded = true
 				})
