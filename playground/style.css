@@ -132,3 +132,64 @@ body {
 }
 
 
+[tooltip] {
+    position: relative;
+    /* transform: translateY(50%); */
+}
+
+[tooltip]::before {
+    /* animation: tooltipScale 1s ease-out;
+    animation-fill-mode: forwards; */
+    /* animation: tooltipScale 1s ease-out;
+    transform-origin: bottom left; */
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 75%;
+    transform: translateX(-50%);
+    border-width: 4px 6px 0 6px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, .5) transparent transparent transparent;
+    z-index: 100;
+}
+
+[tooltip]::after {
+    animation: tooltipScale .3s ease-out;
+    animation-fill-mode: forwards;
+    transform-origin: bottom left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    /* text-transform: uppercase; */
+    letter-spacing: .5px;
+
+    /* transform: translateX(-50%)   translateY(-100%); */
+    content: attr(tooltip);
+    text-emphasis: em;
+    position: absolute;
+    left: 60%;
+    top: -66px;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+    color: #fff;
+    padding:12px 10px;
+    font-size: 16px;
+    min-width: 80px;
+    border-radius: 5px;
+    pointer-events: none; 
+}
+
+@keyframes tooltipScale {
+    0% {
+        transform: scale(0, 0);
+
+    }
+    80% {
+        transform: scale(1.1, 1.1);
+    }
+    100% {
+        transform: scale(1, 1);
+
+    }
+}
+
+

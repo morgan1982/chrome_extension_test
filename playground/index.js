@@ -4,6 +4,18 @@ window.onload = function () {
     let container = document.querySelector('.spin');
     let click = false;
 
+
+    const addToolTip = () => {
+        box.addEventListener("mouseenter", () => {
+            console.log("enter");
+            box.setAttribute("tooltip", "rikste ton server");
+        })
+        box.addEventListener("mouseleave", () => {
+            console.log("leave");
+            box.removeAttribute("tooltip");
+        })
+    }
+
     const Spin = () => {
         container.addEventListener('mouseenter', () => {
             container.className = "active";
@@ -16,9 +28,26 @@ window.onload = function () {
         
      }
 
-    Fly();
-    // Spin();
+    const testAnimations = option => {
+        
+        switch(option) {
 
+            case 1:
+                addToolTip();
+                break;
+            case 2:
+                Fly();
+                break;
+            case 3:
+                Spin();
+                break;
+            default:
+                return 0;
+        }
+    }
+    //  1 -tooltip 2. fly 3. spin 
+    testAnimations(3);
+ 
     function Fly() {
 
     
