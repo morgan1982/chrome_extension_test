@@ -12,7 +12,7 @@ function tabCreator (request, sender, sendResponse) {
 	chrome.tabs.create({
 
 		url: 'https://livetest.dropshie.com/App/AddInventory.aspx',
-		active: true // sets the tab to be active
+		active: false // sets the tab to be active
 	}, (tab) => {
 
 		// execute the script after the tab is loaded

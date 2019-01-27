@@ -46,7 +46,7 @@ window.onload = function () {
         }
     }
     //  1 -tooltip 2. fly 3. spin 
-    testAnimations(3);
+    testAnimations(2);
  
     function Fly() {
 
