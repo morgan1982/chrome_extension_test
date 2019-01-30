@@ -7,15 +7,17 @@ window.onload = function () {
 
 
     const addToolTip = () => {
-        box.addEventListener("mouseenter", () => {
-            console.log("enter");
-            // box.className -= 'reverse';
-            box.setAttribute("tooltip", "Add to DROPshie inventory");
-        })
-        box.addEventListener("mouseleave", () => {
-            console.log("leave");
-            box.removeAttribute("tooltip");
-            
+        // box.addEventListener("mouseenter", () => {
+        //     console.log("enter");
+        //     // box.className -= 'reverse';
+        //     box.setAttribute("tooltip", "Add to DROPshie inventory");
+        // })
+        // box.addEventListener("mouseleave", () => {
+        //     console.log("leave");
+        //     box.removeAttribute("tooltip");
+        // })
+        tool.addEventListener("mouseleave", () => {
+            tool.className += " hide";
         })
     }
 

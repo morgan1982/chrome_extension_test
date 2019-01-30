@@ -136,18 +136,18 @@ body {
 }
 
 
-[tooltip] {
+.tooltip {
     position: relative;
 }
 
-[tooltip]::before,
-[tooltip]::after {
+.tooltip::before,
+.tooltip::after {
     display: block;
     position: absolute;
     /* opacity: 0; */
 }
 
-[tooltip]::before {
+.tooltip::before {
     content: "";
     top: -6px;
     left: 75%;
@@ -163,13 +163,13 @@ body {
     /* transform-origin: bottom left; */
 }
 
-[tooltip]::after {
+.tooltip::after {
     /* animation-delay: 1s; */
     /* transform-origin: bottom left; */
     /* font-family: Arial, Helvetica, sans-serif; */
     font-weight: 400;
     letter-spacing: .5px;
-    content: attr(tooltip);
+    content: attr(tool);
     /* text-emphasis: em; */
     filter: unset !important;
     left: 60%;
@@ -192,15 +192,19 @@ body {
 
     transform: scale(0, 0);
     /* animation-delay: 1s; */
-    animation: tooltipScale .3s ease-out .5s;
+    /* animation: tooltipScale .3s ease-out .5s; */
     /* animation-play-state: paused; */
-    /* animation-direction: alternate-reverse; */
-    animation-fill-mode: backwards;
+    /* animation-direction: f; */
+    /* animation-fill-mode: forwards; */
     transform-origin: bottom left;
 
 
 }
-[tooltip]:hover::after {
+
+.hide {
+    animation: tooltipHide 1s linear;
+}
+.tooltip:hover::after {
     animation: tooltipScale .3s ease-out .5s;
 
     /* animation: tooltipHide .3s ease-out .5s; */
@@ -241,7 +245,7 @@ body {
         opacity: 1;
     }
 }
-.tooltip {
+/* .tooltip {
     position: relative;
   }
 
@@ -293,7 +297,7 @@ body {
 
 .tooltip.expand:hover:after {
     transition: all .2s .1s ease-in-out;
-}
+} */
   
 
 
