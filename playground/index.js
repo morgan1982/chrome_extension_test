@@ -2,17 +2,20 @@ window.onload = function () {
 
     let box = document.querySelector('.box_open');
     let container = document.querySelector('.spin');
+    let tool = document.querySelector('.box_open>span');
     let click = false;
 
 
     const addToolTip = () => {
         box.addEventListener("mouseenter", () => {
             console.log("enter");
-            box.setAttribute("tooltip", "rikste ton server");
+            // box.className -= 'reverse';
+            box.setAttribute("tooltip", "Add to DROPshie inventory");
         })
         box.addEventListener("mouseleave", () => {
             console.log("leave");
             box.removeAttribute("tooltip");
+            
         })
     }
 
@@ -46,7 +49,7 @@ window.onload = function () {
         }
     }
     //  1 -tooltip 2. fly 3. spin 
-    testAnimations(2);
+    testAnimations(1);
  
     function Fly() {
 
