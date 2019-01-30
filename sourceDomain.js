@@ -140,6 +140,30 @@ function injectButton(title) {
 
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'dropshie_btn');
+	
+		btn.addEventListener("mouseenter", e => {
+			e.target.setAttribute('tooltip', 'list product')
+		})
+		btn.addEventListener("mouseleave", e => {
+			e.target.removeAttribute("tooltip");
+		})
+	// Add tooltip to the button
+	// new HoverIntent()
+	// const Tooltipy = () => {
+	// 	btn.addEventListener('mouseenter', () => {
+	// 		setTimeout(() => {
+	// 			btn.setAttribute("tooltip", "list product");
+	// 			console.log("enter the tooltip")
+	// 		}, 500);
+
+	// 	})
+	// 	btn.addEventListener("mouseleave", () => {
+	// 		btn.removeAttribute("tooltip")
+	// 		console.log("remove the tooltips")
+	// 	})
+	// }
+	// Tooltipy();
+	
 
 	title.appendChild(btn);
 
