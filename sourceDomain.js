@@ -140,33 +140,31 @@ function injectButton(title) {
 
 	let btn = document.createElement('span');
 		btn.setAttribute('class', 'dropshie_btn');
+		title.appendChild(btn);
+
+	// TOOLTIP CREATOR
+	let body = document.querySelector('body');
+	let bannerContainer = document.createElement('div');
+	bannerContainer.className = "banner_container";
+
+	let banner = document.createElement('div'); 
+	banner.className = "banner";
+	// banner.offsetHeight // css relfow to block the transition
+	banner.innerHTML = "Add to <span style=\" color: #449a96; font-weight: 700;\">DROP</span><span>shie</span> inventory"
+	bannerContainer.appendChild(banner);
+	body.appendChild(bannerContainer);
 	
-		btn.addEventListener("mouseenter", e => {
-			e.target.setAttribute('tooltip', 'list product')
-		})
-		btn.addEventListener("mouseleave", e => {
-			e.target.removeAttribute("tooltip");
-		})
-	// Add tooltip to the button
-	// new HoverIntent()
-	// const Tooltipy = () => {
-	// 	btn.addEventListener('mouseenter', () => {
-	// 		setTimeout(() => {
-	// 			btn.setAttribute("tooltip", "list product");
-	// 			console.log("enter the tooltip")
-	// 		}, 500);
+	btn.addEventListener('click', () => {
+		chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
+	})
 
-	// 	})
-	// 	btn.addEventListener("mouseleave", () => {
-	// 		btn.removeAttribute("tooltip")
-	// 		console.log("remove the tooltips")
-	// 	})
-	// }
-	// Tooltipy();
-	
+	btn.addEventListener('mouseenter', () => {
+		banner.className += " animated";
+	})
 
-	title.appendChild(btn);
-
+	btn.addEventListener('mouseleave', () => {
+		banner.classList.remove('animated');
+	})
 
 	btn.addEventListener('click', () => {
 	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })

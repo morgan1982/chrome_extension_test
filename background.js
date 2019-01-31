@@ -1,4 +1,3 @@
-
 const raw_domains = new Domains() // from the sourceUrls
 raw_domains.format()
 const validUrls = raw_domains.validUrls;
