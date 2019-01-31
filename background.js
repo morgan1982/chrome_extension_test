@@ -10,7 +10,7 @@ function tabCreator (request, sender, sendResponse) {
 
 	chrome.tabs.create({
 
-		url: 'https://dropshie.com/App/AddInventory.aspx',
+		url: 'https://www.dropshie.com/App/AddInventory.aspx',
 		active: false // sets the tab to be active
 	}, (tab) => {
 
