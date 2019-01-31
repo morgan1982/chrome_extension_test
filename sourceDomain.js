@@ -166,10 +166,6 @@ function injectButton(title) {
 		banner.classList.remove('animated');
 	})
 
-	btn.addEventListener('click', () => {
-	    chrome.runtime.sendMessage({ message: "add", target: "dropshie", url: currentUrl })
-	})
-
 }
 
 
