@@ -16,9 +16,9 @@ window.onload = function () {
         //     console.log("leave");
         //     box.removeAttribute("tooltip");
         // })
-        tool.addEventListener("mouseleave", () => {
-            tool.className += " hide";
-        })
+        // tool.addEventListener("mouseleave", () => {
+        //     tool.className += " hide";
+        // })
     }
 
     const Spin = () => {

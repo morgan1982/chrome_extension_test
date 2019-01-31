@@ -136,18 +136,18 @@ body {
 }
 
 
-.tooltip {
+[tooltip] {
     position: relative;
 }
 
-.tooltip::before,
-.tooltip::after {
+[tooltip]::before,
+[tooltip]::after {
     display: block;
     position: absolute;
     /* opacity: 0; */
 }
 
-.tooltip::before {
+[tooltip]::before {
     content: "";
     top: -6px;
     left: 75%;
@@ -158,18 +158,19 @@ body {
     z-index: 100;
     /* transform: scale(0, 0); */
     opacity: 0;
-    animation: pointer .4s ease-in .5s;
-    animation-fill-mode: forwards;
+    /* animation: pointer .4s ease-in .5s; */
+    transform: translate3d(0,6px,0);
+    /* animation-fill-mode: forwards; */
     /* transform-origin: bottom left; */
 }
 
-.tooltip::after {
+[tooltip]::after {
     /* animation-delay: 1s; */
     /* transform-origin: bottom left; */
     /* font-family: Arial, Helvetica, sans-serif; */
     font-weight: 400;
     letter-spacing: .5px;
-    content: attr(tool);
+    content: attr(tooltip);
     /* text-emphasis: em; */
     filter: unset !important;
     left: 60%;
@@ -190,9 +191,12 @@ body {
     border-radius: 5px;
     pointer-events: none;
 
-    transform: scale(0, 0);
+    /* transform: scale(0, 0); */
+    transform: scale3d(0,0,1);
+    transition: all .2s ease-in-out .2s;
+    opacity: 0;
     /* animation-delay: 1s; */
-    /* animation: tooltipScale .3s ease-out .5s; */
+    /* animation: tooltipHide .3s ease-out .5s; */
     /* animation-play-state: paused; */
     /* animation-direction: f; */
     /* animation-fill-mode: forwards; */
@@ -204,11 +208,20 @@ body {
 .hide {
     animation: tooltipHide 1s linear;
 }
-.tooltip:hover::after {
-    animation: tooltipScale .3s ease-out .5s;
 
+[tooltip]:hover::after {
+    transform: scale3d(1,1,1);
+    opacity: 1;
+    transition: all .2s ease-in-out .5s;
+    /* animation: tooltipScale .3s ease-out .5s; */
+    /* transform: scale(1, 1); */
     /* animation: tooltipHide .3s ease-out .5s; */
-    animation-fill-mode: forwards;   
+    /* animation-fill-mode: forwards;    */
+}
+[tooltip]:hover::before {
+    transition: all .2s ease-in-out .7s;
+    transform: scale3d(1,1,1);
+    opacity: 1;
 }
 
 @keyframes tooltipHide {
