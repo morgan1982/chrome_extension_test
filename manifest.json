@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
-	"name": "testing_module",
-	"description": "testing filling the form from source",
+	"name": "Dropshie Assistant",
+	"description": "Dropshie Order Fullfilment Chrome Extension",
 	"version": "0.7.8",
 	"web_accessible_resources": [
 		"images/*"
