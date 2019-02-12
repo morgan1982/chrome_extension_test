@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "testing_module",
 	"description": "testing filling the form from source",
-	"version": "0.7.7",
+	"version": "0.7.8",
 	"web_accessible_resources": [
 		"images/*"
 	],
@@ -56,7 +56,9 @@
 		"activeTab",
 		"webNavigation",
 		"tabs",
-		"https://wwww.dropshie.com/App/AddInventory.aspx"
+		"https://wwww.dropshie.com/App/AddInventory.aspx",
+		"https://dropshie.com/App/AddInventory.aspx"
+
 	],
 	"background": {
 		"scripts": ["sourceUrls.js", "background.js"],

@@ -10,8 +10,9 @@ function messageReceiver(request, sender, sendResponse) {
 	if ( target === "dropshie") {
 			// url of the supplier
 			sourceUrl = request.url;
+
 			// console.log(`supplier url ${ sourceUrl }`);
-		
+
 
 		// format the origin marketplace to set value to combobox
 		// fill new domains here in order to select the correct domain
@@ -81,7 +82,7 @@ function messageReceiver(request, sender, sendResponse) {
 
 		let origin;
 		// console.log("--array after the filter: --", arrOfValues);
-		// handles overstock and target 
+		// handles overstock and target
 		// cases in which in the sourceArray there is values for the same domain without suffix (like the pair overstock && overstock ca)
 		if (arrOfValues[1] === "overstock ca" || arrOfValues[1] === "target au" ) {
 			origin = arrOfValues[1]
