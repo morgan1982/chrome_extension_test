@@ -16,6 +16,7 @@
 		{
 			"matches": [
 				"https://www.amazon.co.uk/*",
+				"https://www.amazon.de/*",
 				"https://www.amazon.com/*",
 				"https://www.amazon.com.au/*",
 				"https://www.amazon.ca/*",

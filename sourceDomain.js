@@ -32,6 +32,10 @@ function currentDomainFinder( sourceDomains, url) {
 		domain = "costco_uk";
 		return domain
 	}
+	else if ( url.includes("amazon") && url.includes("de") ) {
+		domain = "amazon_de";
+		return domain
+	}
 	else if ( url.includes("walmart") && url.includes("ca") ) {
 		domain = "walmart_ca";
 		return domain
@@ -64,6 +68,7 @@ function currentDomainFinder( sourceDomains, url) {
 // attribute values to target the elements for each host
 const supplierAtributes = {
 	amazon: '#title',
+	amazon_de: '#title',
 	ebay: '#itemTitle',
 	homedepot: '.product-title__title',
 	walmart_com: '.hf-BOTContainer .ProductTitle .prod-ProductTitle>div',
@@ -177,7 +182,7 @@ let injectionSucceded = false;
 // parameter: current page url
 // returns the domainName of the current page
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
-
+console.log(currentDomain);
 // gets the title element in order to inject the button
 getTitle(currentDomain,supplierAtributes, title => {
 	// console.log("--after the getTitle function--", title)

@@ -17,6 +17,7 @@ function messageReceiver(request, sender, sendResponse) {
 		// format the origin marketplace to set value to combobox
 		// fill new domains here in order to select the correct domain
 		const sourceArr = [ "amazon com",
+							"amazon de",
 							"amazon uk",
 							"amazon ca",
 							"amazon au",
@@ -96,7 +97,7 @@ function messageReceiver(request, sender, sendResponse) {
 		function formInputHandler(source, origin) {
 
 			return new Promise((resolve, reject) => {
-
+				// console.log(origin);
 				// debugger;
 				let productUrl = document.querySelector('#MainContent_TextBoxFrom');
 				productUrl.value += source;
