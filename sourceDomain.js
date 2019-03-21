@@ -1,4 +1,4 @@
-// console.log("inside source");
+console.log("inside source");
 
 // the url of the tab
 const currentUrl = window.location.href;
@@ -26,7 +26,7 @@ function currentDomainFinder( sourceDomains, url) {
 	// extract the domain from the url
 	url = url.split('/')[2];
 
-	// handles the different extensions for walmart, costco & target
+	// handles the different extensions
 	// console.log(`host: ${ url }`);
 	if ( url.includes("costco") && url.includes("uk") ) {
 		domain = "costco_uk";
@@ -34,6 +34,14 @@ function currentDomainFinder( sourceDomains, url) {
 	}
 	else if ( url.includes("amazon") && url.includes("de") ) {
 		domain = "amazon_de";
+		return domain
+	}
+	else if ( url.includes("zooplus") && url.includes("uk") ) {
+		domain = "zooplus_uk";
+		return domain
+	}
+	else if ( url.includes("zooplus") && url.includes("de") ) {
+		domain = "zooplus_de";
 		return domain
 	}
 	else if ( url.includes("walmart") && url.includes("ca") ) {
@@ -65,7 +73,7 @@ function currentDomainFinder( sourceDomains, url) {
 
 }
 
-// attribute values to target the elements for each host
+// attribute values to target the elements for each host to inject the button inside
 const supplierAtributes = {
 	amazon: '#title',
 	amazon_de: '#title',
@@ -78,7 +86,10 @@ const supplierAtributes = {
 	costco_uk: '.product-page-container .hidden-xs h1',
 	costco: '#product-details .product-h1-container>h1',
 	zooplus: '.product__description',
-	aosom: '.product-name',
+	zooplus_uk: '.producttitle',
+	zooplus_de: '.producttitle',
+	// aosom: '.product-name',
+	aosom: '#right-product-info>h1',
 	petplanet: '.container--product-name',
 	thinkgeek: '.header',
 	vidaxl: '.container-top>.title',
@@ -182,7 +193,7 @@ let injectionSucceded = false;
 // parameter: current page url
 // returns the domainName of the current page
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
-console.log(currentDomain);
+console.log("__the current domain__", currentDomain);
 // gets the title element in order to inject the button
 getTitle(currentDomain,supplierAtributes, title => {
 	// console.log("--after the getTitle function--", title)
@@ -211,7 +222,7 @@ document.onreadystatechange = function () {
 
 
 
-if (currentDomain === "target_com") {
+if (currentDomain === "target_com" || currentDomain === "aosom") {
 	chrome.runtime.sendMessage({ message: "target"});
 
 	// receive the dom update event and inject the button again

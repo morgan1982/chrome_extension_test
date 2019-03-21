@@ -36,7 +36,9 @@ function messageReceiver(request, sender, sendResponse) {
 							"overstock ca",
 							"vidaxl com",
 							"vidaxl au",
-							"vidaxl uk"];
+							"vidaxl uk",
+							"zooplus uk",
+							"zooplus de"];
 
 		function removeExtensions (str) {
 

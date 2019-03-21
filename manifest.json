@@ -2,24 +2,25 @@
 	"manifest_version": 2,
 	"name": "Dropshie Assistant",
 	"description": "Dropshie Order Fullfilment Chrome Extension",
-	"version": "0.8.0",
+	"version": "0.8.1",
 	"web_accessible_resources": [
 		"images/*"
 	],
 	"content_scripts": [
 		{
 			"matches": [
-				"https://www.dropshie.com/*"
+				"https://www.dropshie.com/*",
+				"https://livetest.dropshie.com/*"
 			],
 			"js": ["targetDropshie.js"]
 		},
 		{
 			"matches": [
 				"https://www.amazon.co.uk/*",
-				"https://www.amazon.de/*",
 				"https://www.amazon.com/*",
 				"https://www.amazon.com.au/*",
 				"https://www.amazon.ca/*",
+				"https://www.amazon.de/*",
 				"https://www.ebay.co.uk/*",
 				"https://www.ebay.com.au/*",
 				"https://www.ebay.com/*",
@@ -28,10 +29,14 @@
 				"https://www.homedepot.ca/*",
 				"https://www.walmart.com/*",
 				"https://www.aosom.co.uk/*",
+				"https://www.aosom.de/*",
 				"https://intl.target.com/*",
 				"https://www.target.com/*",
 				"https://www.target.com.au/*",
 				"https://www.zooplus.com/*",
+				"https://www.zooplus.co.uk/*",
+				"https://www.zooplus.com/*",
+				"https://www.zooplus.de/*",
 				"https://www.petplanet.co.uk/*",
 				"https://www.thinkgeek.com/*",
 				"https://www.vidaxl.com/*",
@@ -58,11 +63,13 @@
 		"webNavigation",
 		"tabs",
 		"https://wwww.dropshie.com/App/AddInventory.aspx",
-		"https://dropshie.com/App/AddInventory.aspx"
+		"https://dropshie.com/App/AddInventory.aspx",
+		"https://livetest.dropshie.com/App/AddInventory.aspx"
+
 
 	],
 	"background": {
-		"scripts": ["sourceUrls.js", "background.js"],
+		"scripts": ["config.js", "sourceUrls.js", "background.js"],
 		"persistent": false
 	}
 

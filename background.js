@@ -9,8 +9,8 @@ function tabCreator (request, sender, sendResponse) {
 	let { url, title } = request;
 
 	chrome.tabs.create({
-
-		url: 'https://www.dropshie.com/App/AddInventory.aspx',
+		// switch between dev and production mode
+		url: config.production,
 		active: false // sets the tab to be active
 	}, (tab) => {
 
