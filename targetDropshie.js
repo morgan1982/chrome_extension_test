@@ -21,6 +21,8 @@ function messageReceiver(request, sender, sendResponse) {
 							"amazon uk",
 							"amazon ca",
 							"amazon au",
+							"aosom uk",
+							"aosom de",
 							"costco com",
 							"costco uk",
 							"costco ca",

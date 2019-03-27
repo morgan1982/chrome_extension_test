@@ -88,7 +88,6 @@ const supplierAtributes = {
 	zooplus: '.product__description',
 	zooplus_uk: '.producttitle',
 	zooplus_de: '.producttitle',
-	// aosom: '.product-name',
 	aosom: '#right-product-info>h1',
 	petplanet: '.container--product-name',
 	thinkgeek: '.header',
@@ -100,7 +99,6 @@ const supplierAtributes = {
 function getTitle(domainName, supplierAtributesObj, callback) {
 		// console.log('inside getTitle', domainName);
 		// console.log('inside getTitle', supplierAtributes);
-
 
 		let title = document.querySelector(supplierAtributesObj[domainName]);
 		// console.log("new title creator", title);
@@ -117,7 +115,7 @@ function getTitle(domainName, supplierAtributesObj, callback) {
 					counter += 1;
 
 					if (title){
-						// console.log("element found: ", title);
+						console.log("element found: ", title);
 						return resolve(title)
 					}
 					else if (counter >= 20) {
@@ -193,8 +191,11 @@ let injectionSucceded = false;
 // parameter: current page url
 // returns the domainName of the current page
 const currentDomain = currentDomainFinder( companyNameExtractor(domains), currentUrl);
-console.log("__the current domain__", currentDomain);
+// console.log("__the current domain__", currentDomain);
 // gets the title element in order to inject the button
+
+
+
 getTitle(currentDomain,supplierAtributes, title => {
 	// console.log("--after the getTitle function--", title)
 	// ObserveTitle(title, injectButton);
@@ -203,6 +204,8 @@ getTitle(currentDomain,supplierAtributes, title => {
 		injectionSucceded = true;
 	}
 });
+
+
 
 // failsafe for sites like target.com using async scripts
 // runs always at the end of the document
@@ -220,27 +223,39 @@ document.onreadystatechange = function () {
 	}
 }
 
+// Handle Aosom
+// Todo -- have to find a better aproach
+if (currentDomain === "aosom") {
+	// console.log("__inside aosom handler");
+	setTimeout(() => {
+		getTitle(currentDomain, supplierAtributes, title => {
+			console.log("__inside aosom handler title", title);
+			injectButton(title);
+		})
+	}, 3000)
+}
 
 
-if (currentDomain === "target_com" || currentDomain === "aosom") {
+
+if (currentDomain === "target_com") {
 	chrome.runtime.sendMessage({ message: "target"});
-
+	// console.log("run function at the end of the document____")
 	// receive the dom update event and inject the button again
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		// console.log("--runtime--", request)
 		let { message } = request;
-		if ( message === "domUpdated") {
+		if ( message === "domUpdated" && currentDomain !== "aosom") {
 
-		if ( document.readyState === "complete") {
-			// console.log("____Completed")
-			if (!injectionSucceded) {
-				getTitle(currentDomain, supplierAtributes, title => {
-					// console.log("__run  the injection again__");
-					injectButton(title);
-					injectionSucceded = true
-				})
-			}
-		}	
+			if ( document.readyState === "complete") {
+				// console.log("____Completed")
+				if (!injectionSucceded) {
+					getTitle(currentDomain, supplierAtributes, title => {
+						// console.log("__run  the injection again__");
+						injectButton(title);
+						injectionSucceded = true
+					})
+				}
+			}	
 			setTimeout(() => {
 				let btn = document.querySelector('.dropshie_btn');
 				if(!btn) {
