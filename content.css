@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Kaushan';
+    font-style: normal;
+    font-weight: 400;
+    src: url('chrome-extension://__MSG_@@extension_id__/fonts/KaushanScript-Regular.ttf'); 
+   }
+
 .product_title {
     display: flex !important;
     flex-basis: row;
@@ -26,6 +33,35 @@
 .dropshie_btn:active {
     filter: none;
 }
+
+.mult {
+    position: absolute;
+    top: 150px;
+    right: 50px;
+    z-index: 1000;
+}
+
+.multi-text-node {
+    position: absolute;
+    top: 50px;
+    right: -30px;
+    font-size: 18px;
+    font-family: 'Kaushan', cursive;
+    transform: rotate(-15deg);
+}
+
+.grap-node {
+    font-family: 'Kaushan', cursive;
+    color: rgb(32, 163, 157);
+}
+
+/* .mult::after {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    content: 'multi';
+    font-family: 'Pacifico', cursive;
+} */
 
 @keyframes fromAbove {
     0% {

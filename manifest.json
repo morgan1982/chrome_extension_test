@@ -4,7 +4,8 @@
 	"description": "Dropshie Order Fullfilment Chrome Extension",
 	"version": "0.8.2",
 	"web_accessible_resources": [
-		"images/*"
+		"images/*",
+		"fonts/KaushanScript-Regular.ttf"
 	],
 	"content_scripts": [
 		{
@@ -13,6 +14,12 @@
 				"https://livetest.dropshie.com/*"
 			],
 			"js": ["targetDropshie.js"]
+		},
+		{
+			"matches": [
+				"https://www.amazon.com/*"
+			],
+			"js": ["amazonMult.js"]
 		},
 		{
 			"matches": [
