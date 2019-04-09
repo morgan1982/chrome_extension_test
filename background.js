@@ -36,6 +36,9 @@ chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
 		tabCreator(req, sender, sendResponse);
 		sendResponse({ message: "product added" })
 	}
+	else if (req.message === "multi-add") {
+		console.log(req.urls);
+	}
 })
 
 

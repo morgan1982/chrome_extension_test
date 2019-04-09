@@ -38,6 +38,15 @@ btn.appendChild(multiBanner);
 
 buttonContainer.appendChild(btn);
 
+
+btn.addEventListener('click', () => {
+    chrome.runtime.sendMessage({ 
+        message: "multi-add", 
+        target: "dropshie", 
+        url: currentUrl,
+        urls: arrayOfProductUrls })
+})
+
 // try {
 //     btn.parentNode.insertBefore(multiBanner, btn.nextSibling);
 // }
